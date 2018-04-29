@@ -1,15 +1,18 @@
 @import './mixin.scss';
+@import './animate.scss';
 @import './resetPc.scss';
 
 html{
   // 根据项目实际需求定制默认字体颜色
+  height: 100%;
   color:#333;
 
   // 根据项目实际需求，限制页面大小，防止页面排版变形
   body{
+    margin:0 auto;
     min-width:1366px;
     max-width:1920px;
-    margin:0 auto;
+    height: 100%;
     overflow-x:auto;
   }
 
