@@ -1,21 +1,33 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Loading from '../components/loading/main.vue';
-import Demo from '../../examples/demo';
+import DemoNav from '../../examples/demo-nav.vue';
+import DemoLoading from '../../examples/demo-loading.vue';
+import DemoCheckbox from '../../examples/demo-checkbox.vue';
+import DemoRadio from '../../examples/demo-radio.vue';
 
 Vue.use(Router);
 
 export default new Router({
   routes: [
     {
-      path: '/loading',
-      name: 'Loading',
-      component: Loading
+      path: '/',
+      name: 'DemoNav',
+      component: DemoNav
     },
     {
-      path: '/demo',
-      name: 'Demo',
-      component: Demo
+      path: '/demo-loading',
+      name: 'DemoLoading',
+      component: DemoLoading
+    },
+    {
+      path: '/demo-checkbox',
+      name: 'DemoCheckbox',
+      component: DemoCheckbox
+    },
+    {
+      path: '/demo-radio',
+      name: 'DemoRadio',
+      component: DemoRadio
     }
   ]
 });
