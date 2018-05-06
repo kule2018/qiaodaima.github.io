@@ -1,6 +1,7 @@
 <template>
   <div>
     <Loading></Loading>
+    <Loading></Loading>
   </div>
 </template>
 
