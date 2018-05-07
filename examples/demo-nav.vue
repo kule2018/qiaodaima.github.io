@@ -5,6 +5,7 @@
       <a href="#/demo-loading">loading加载动画</a>
       <a href="#/demo-checkbox">复选框</a>
       <a href="#/demo-radio">单选按钮</a>
+      <a href="#/demo-input">输入框</a>
     </div>
   </div>
 </template>

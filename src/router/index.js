@@ -4,6 +4,7 @@ import DemoNav from '../../examples/demo-nav.vue';
 import DemoLoading from '../../examples/demo-loading.vue';
 import DemoCheckbox from '../../examples/demo-checkbox.vue';
 import DemoRadio from '../../examples/demo-radio.vue';
+import DemoInput from '../../examples/demo-input.vue';
 
 Vue.use(Router);
 
@@ -28,6 +29,11 @@ export default new Router({
       path: '/demo-radio',
       name: 'DemoRadio',
       component: DemoRadio
+    },
+    {
+      path: '/demo-input',
+      name: 'DemoInput',
+      component: DemoInput
     }
   ]
 });
