@@ -1,33 +1,8 @@
 <template>
   <div>
-    <p>选择的值：{{checked}}</p>
-    <Radio
-      v-model="checked"
-      :value="'选项1的值'"
-      :checked="checked"
-      :disabled="false"
-      :text="'选项1的文本'">
-    </Radio>
-
-    <br><br>
-
-    <Radio
-      v-model="checked"
-      :value="'选项2的值'"
-      :checked="checked"
-      :disabled="false"
-      :text="'选项2的文本'">
-    </Radio>
-
-    <br><br>
-
-    <Radio
-      v-model="checked"
-      :value="'选项3的值'"
-      :checked="checked"
-      :disabled="false"
-      :text="'选项3的文本'">
-    </Radio>
+    <p>选择的值</p>
+    <Radio v-model="currValue" :label="true"></Radio>
+    <Radio v-model="currValue" :label="false"></Radio>
   </div>
 </template>
 
@@ -39,7 +14,7 @@
     components: {Radio},
     data() {
       return {
-        checked: '选项2的值---'
+        currValue: '被选择的值哦'
       };
     }
   };

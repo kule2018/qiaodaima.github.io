@@ -2,9 +2,10 @@
   <label class="radio-item">
     <input
       v-model="checked"
-      :value="value"
       :name="name"
       :disabled="disabled"
+      :value="value"
+      @change="change"
       type="radio">
     <i class="icon"></i>
     <span>{{text}}</span>
@@ -15,15 +16,15 @@
   export default {
     name: 'Radio',
     props: {
-      checked: {
-
-      },
-      value: {
-        type: [String, Number, Boolean]
-      },
       name: {
         type: String,
-        default: 'defaultName'
+        default: 'default-name'
+      },
+      value: {
+        required: true
+      },
+      checked: {
+        required: true
       },
       disabled: {
         type: Boolean,
@@ -31,34 +32,36 @@
       },
       text: {
         type: String,
-        default: '单选按钮文案'
+        default: '单选按钮'
       }
     },
-    computed: {
-    },
     methods: {
+      change(event) {
+        this.$emit('input', event.target.value);
+        console.log(event.target.value);
+      }
     }
   };
 </script>
 
 <style lang="scss" scoped>
-  .radio-item {
+  .radio-item{
     position: relative;
     font-size: 0;
 
-    input[type="radio"] {
+    input[type="radio"]{
       position: absolute;
       left: 0;top: 0;
       width: 100%; height: 100%;
       opacity: 0;
 
-      &:disabled {
-        & + i {
+      &:disabled{
+        & + i{
           background: #f8f4f4;
         }
       }
-      &:checked {
-        & + i {
+      &:checked{
+        & + i{
           border-color: #409eff;
           background: #409eff;
 
@@ -71,17 +74,17 @@
             background: #fff;
           }
         }
-        &:disabled + i {
+        &:disabled + i{
           background: #f5f7fa;
           border-color: #c0c4cc;
 
-          &:after {
+          &:after{
             background: #c0c4cc;
           }
         }
       }
     }
-    i {
+    i{
       position: relative;
       width: 14px; height: 14px;
       margin-right: 6px;
@@ -89,7 +92,7 @@
       border-radius: 50%;
       vertical-align: middle;
     }
-    span {
+    span{
       line-height: 1;
       font-size: 14px;
       vertical-align: middle;
