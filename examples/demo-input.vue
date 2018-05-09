@@ -3,10 +3,10 @@
     <h1>输入框</h1>
     <div style=" margin: 20px; padding: 20px; border:1px solid red;">
       外部：
-      <input v-model="kkk" type="text">
+      <input v-model="kkk.value" type="text">
     </div>
 
-    <my-input v-model="kkk" :disabled="false"></my-input>
+    <my-input v-model="kkk.value" v-bind="kkk"></my-input>
   </div>
 </template>
 
@@ -18,9 +18,10 @@
     components: {myInput: Input},
     data() {
       return {
-        kkk: '7878',
-        modeData: {
-          display: true
+        kkk: {
+          value: '',
+          disabled: true,
+          placeholder: 'dkdsjklfds'
         }
       };
     },

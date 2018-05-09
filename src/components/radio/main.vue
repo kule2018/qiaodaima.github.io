@@ -1,6 +1,12 @@
 <template>
-  <label @click="callback" class="radio-item disabled">
-    <input :name="name" disabled type="radio">
+  <label class="radio-item">
+    <input
+      :name="name"
+      :disabled="disabled"
+      :value="value"
+      :checked="checked"
+      @change="input"
+      type="radio">
     <i class="icon"></i>
     <span>{{text}}</span>
   </label>
@@ -17,20 +23,23 @@
       value: {
         default: false
       },
+      checked: {
+        type: Boolean,
+        default: false
+      },
+      disabled: {
+        type: Boolean,
+        default: false
+      },
       text: {
         type: String,
         default: '单选按钮'
       }
     },
-
-    // computed: {
-    //   valueCopy() {
-    //     // return value;
-    //   }
-    // },
     methods: {
-      callback() {
-        this.$emit('callback', '测试数据');
+      input(event) {
+        this.$emit('input', event.target.checked);
+        console.log(event.target.checked);
       }
     }
   };
@@ -39,14 +48,19 @@
 <style lang="scss" scoped>
   .radio-item{
     position: relative;
-
     font-size: 0;
+
     input[type="radio"]{
       position: absolute;
       left: 0;top: 0;
       width: 100%; height: 100%;
       opacity: 0;
 
+      &:disabled{
+        & + i{
+          background: #f8f4f4;
+        }
+      }
       &:checked{
         & + i{
           border-color: #409eff;
@@ -63,7 +77,7 @@
         }
         &:disabled + i{
           background: #f5f7fa;
-          border-color: #e4e7ed;
+          border-color: #c0c4cc;
 
           &:after{
             background: #c0c4cc;
@@ -75,13 +89,9 @@
       position: relative;
       width: 14px; height: 14px;
       margin-right: 5px;
-      border: 1px solid #dcdfe6;
+      border: 1px solid #9c9c9c;
       border-radius: 50%;
       vertical-align: middle;
-
-      &:hover{
-        border-color: #409eff;
-      }
     }
     span{
       font-size: 14px;
