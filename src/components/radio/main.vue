@@ -1,11 +1,11 @@
 <template>
   <label class="radio-item">
     <input
+      v-model="checked"
       :name="name"
       :disabled="disabled"
       :value="value"
-      :checked="checked"
-      @change="input"
+      @change="change"
       type="radio">
     <i class="icon"></i>
     <span>{{text}}</span>
@@ -21,11 +21,10 @@
         default: 'default-name'
       },
       value: {
-        default: false
+        required: true
       },
       checked: {
-        type: Boolean,
-        default: false
+        required: true
       },
       disabled: {
         type: Boolean,
@@ -37,9 +36,9 @@
       }
     },
     methods: {
-      input(event) {
-        this.$emit('input', event.target.checked);
-        console.log(event.target.checked);
+      change(event) {
+        this.$emit('input', event.target.value);
+        console.log(event.target.value);
       }
     }
   };
@@ -88,12 +87,13 @@
     i{
       position: relative;
       width: 14px; height: 14px;
-      margin-right: 5px;
+      margin-right: 6px;
       border: 1px solid #9c9c9c;
       border-radius: 50%;
       vertical-align: middle;
     }
     span{
+      line-height: 1;
       font-size: 14px;
       vertical-align: middle;
     }
