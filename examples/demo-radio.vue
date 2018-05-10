@@ -1,8 +1,10 @@
 <template>
   <div>
-    <p>选择的值</p>
-    <Radio v-model="currValue" :label="true"></Radio>
-    <Radio v-model="currValue" :label="false"></Radio>
+    <p>选择的值：{{value}}</p>
+    <Radio v-model="value" :label="'选项1的值'"></Radio>
+    <Radio v-model="value" :label="'选项2的值'"></Radio>
+    <Radio v-model="value" :label="'选项3的值'" :disabled="true"></Radio>
+    <Radio v-model="value" :label="'选项4的值'" :disabled="true"></Radio>
   </div>
 </template>
 
@@ -14,7 +16,7 @@
     components: {Radio},
     data() {
       return {
-        currValue: '被选择的值哦'
+        value: '选项3的值'
       };
     }
   };

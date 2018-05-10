@@ -2,7 +2,7 @@
   <label class="radio-item">
     <input
       v-model="checked"
-      :value="value"
+      :value="label"
       :name="name"
       :disabled="disabled"
       type="radio">
@@ -15,11 +15,13 @@
   export default {
     name: 'Radio',
     props: {
-      checked: {
-
-      },
       value: {
-        type: [String, Number, Boolean]
+        type: [String, Number, Boolean],
+        required: true
+      },
+      label: {
+        type: [String, Number, Boolean],
+        required: true
       },
       name: {
         type: String,
@@ -35,8 +37,14 @@
       }
     },
     computed: {
-    },
-    methods: {
+      checked: {
+        get() {
+          return this.value;
+        },
+        set(newValue) {
+          this.$emit('input', newValue);
+        }
+      }
     }
   };
 </script>
@@ -62,7 +70,7 @@
           border-color: #409eff;
           background: #409eff;
 
-          &:after{
+          &:after {
             position: absolute; content: '';
             left: 50%; top: 50%;
             transform: translate(-50%, -50%);
