@@ -14,5 +14,7 @@
 </script>
 
 <style lang="scss" scoped>
-  //
+  div{
+    padding: 50px;
+  }
 </style>
