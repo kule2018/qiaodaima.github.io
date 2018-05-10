@@ -1,14 +1,51 @@
 <template>
   <label class="checkbox-item">
-    <input checked disabled type="checkbox" name="defaultName">
+    <input
+      v-model="checked"
+      :value="label"
+      :name="name"
+      :disabled="disabled"
+      type="checkbox">
     <i class="icon"></i>
-    <span>复选框</span>
+    <span>{{text}}</span>
   </label>
 </template>
 
 <script>
   export default {
-    name: 'Checkbox'
+    name: 'Checkbox',
+    props: {
+      value: {
+        type: [String, Number, Boolean, Array],
+        required: true
+      },
+      label: {
+        type: [String, Number, Boolean],
+        required: true
+      },
+      name: {
+        type: String,
+        default: 'defaultName'
+      },
+      disabled: {
+        type: Boolean,
+        default: false
+      },
+      text: {
+        type: String,
+        default: '复选框文案'
+      }
+    },
+    computed: {
+      checked: {
+        get() {
+          return this.value;
+        },
+        set(newValue) {
+          this.$emit('input', newValue);
+        }
+      }
+    }
   };
 </script>
 
