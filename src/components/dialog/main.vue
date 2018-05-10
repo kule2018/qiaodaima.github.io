@@ -1,61 +1,126 @@
 <template>
-  <div class="dialog-item">
-    <div class="header">
-      <span class="title-text">标题的文字</span>
-      <i class="btn-close"></i>
-    </div>
-    <div class="content">
-      <slot></slot>
-    </div>
-    <div class="tool-wrap">
-      <a class="" href="javascript:;">默认按钮</a>
-      <a class="primary" href="javascript:;">主要按钮</a>
-      <a class="danger" href="javascript:;">危险按钮</a>
+  <div v-show="show" class="dialog-wrap">
+    <div class="mask"></div>
+    <div class="dialog-item">
+      <div class="header">
+        <i v-if="title.icon" :class="title.icon" class="iconfont"></i>
+        <span class="title-text">{{title.text}}</span>
+        <i class="btn-close"></i>
+      </div>
+      <div class="content">
+        <slot name="content"></slot>
+      </div>
+      <div class="tool-wrap">
+        <a
+          v-for="(button, index) in buttons"
+          @click="callback(button);"
+          :class="button.theme"
+          :key="index"
+          href="javascript:;">
+          {{button.text}}
+        </a>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
   export default {
-    name: 'Dialog'
+    name: 'Dialog',
+    props: {
+      value: {
+        type: Boolean,
+        default: true
+      },
+      title: {
+        type: Object,
+        default() {
+          return {
+            icon: 'icon-home',
+            text: '对话框标题'
+          };
+        }
+      },
+      buttons: {
+        type: Array,
+        default() {
+          return [
+            {
+              flag: '',
+              theme: '',
+              text: '默认按钮'
+            },
+            {
+              flag: '',
+              theme: 'primary',
+              text: '主要按钮'
+            },
+            {
+              flag: '',
+              theme: 'danger',
+              text: '危险按钮'
+            }
+          ];
+        }
+      }
+    },
+    computed: {
+      show: {
+        get() {
+          return this.value;
+        },
+        set(newValue) {
+          this.$emit('input', newValue);
+        }
+      }
+    },
+    methods: {
+      callback(result) {
+        this.$emit('callback', result);
+        console.log(result);
+      }
+    }
   };
 </script>
 
 <style lang="scss" scoped>
-  .dialog-item {
+  .dialog-wrap {
+    z-index: 500;
     position: fixed;
-    width: 620px;
+    left: 0;right: 0;top: 0;bottom: 0;
+  }
+  .mask {
+    position: absolute;
+    left: 0;right: 0;top: 0;bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+  }
+  .dialog-item {
+    position: absolute;
     left: 50%; top: 50%;
+    width: 620px;
     box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.22);
     transform: translate(-50%, -50%);
+    background: #fff;
 
-    & > *{
-      background: #fff;
-    }
-    &:before {
-      z-index: -1;
-      position: fixed; content: "";
-      left: -9999999px; top: -9999999px; right: -9999999px; bottom: -9999999px;
-      background: rgba(0, 0, 0, 0.22);
-    }
-    .header{
+    .header {
       position: relative;
       padding: 10px;
-      border-bottom: solid 1px #f8f8f8;
+      border-bottom: solid 1px #eee;
 
-      .title-text{
+      .title-text {
         max-width: 95%;
         white-space:nowrap;
         text-overflow:ellipsis;
         overflow:hidden;
+        vertical-align: middle;
       }
       .btn-close {
         position: absolute;
         right: 10px; top: 50%;
         line-height: 1;
         font-size: 16px;
-        cursor: pointer;
         transform: translate(0, -50%);
+        cursor: pointer;
 
         &:before {
           content: "\e60a";
@@ -75,7 +140,6 @@
     .tool-wrap {
       position: relative;
       padding: 15px;
-      border-top: solid 1px red;
       font-size: 0;
       text-align: right;
 
@@ -83,18 +147,21 @@
         margin-left: 10px;
         padding: 5px 15px;
         border: 1px solid #ddd;
-        border-radius: 2px;
+        border-radius: 4px;
         font-size: 12px;
 
+        &:hover{
+          opacity: 0.85;
+        }
         &:first-child {
           margin-left: 0;
         }
-        &.primary{
+        &.primary {
           color: #fff;
           border-color: #0079ff;
           background: #0079ff;
         }
-        &.danger{
+        &.danger {
           color: #fff;
           border-color: #ff5e5e;
           background: #ff5e5e;

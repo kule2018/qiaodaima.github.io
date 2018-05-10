@@ -2,7 +2,7 @@
   <div>
     <h1>对话框</h1>
     <Dialog>
-      <div style="padding: 20px;">测试内容</div>
+      <div slot="content" style="padding: 20px;">测试内容</div>
     </Dialog >
   </div>
 </template>
@@ -15,7 +15,7 @@
     components: {Dialog},
     data() {
       return {
-
+        show: true
       };
     },
     methods: {
