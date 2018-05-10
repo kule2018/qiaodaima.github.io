@@ -6,6 +6,7 @@
       <a href="#/demo-checkbox">复选框</a>
       <a href="#/demo-radio">单选按钮</a>
       <a href="#/demo-input">输入框</a>
+      <a href="#/demo-dialog">对话框</a>
     </div>
   </div>
 </template>
