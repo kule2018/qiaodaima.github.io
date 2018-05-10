@@ -1,12 +1,13 @@
 <template>
-  <div>
+  <div style="padding: 50px;">
     <h1>输入框</h1>
-    <div style=" margin: 20px; padding: 20px; border:1px solid red;">
-      外部：
-      <input v-model="kkk.value" type="text">
-    </div>
 
-    <my-input v-model="kkk.value" v-bind="kkk"></my-input>
+    {{modelData1.value}}
+    <my-input v-model="modelData1.value" v-bind="modelData1"></my-input>
+    <br>
+
+    {{modelData2.value}}
+    <my-input v-model="modelData2.value" v-bind="modelData2"></my-input>
   </div>
 </template>
 
@@ -18,10 +19,15 @@
     components: {myInput: Input},
     data() {
       return {
-        kkk: {
-          value: '',
+        modelData1: {
+          value: '数据是双向绑定的',
+          disabled: false,
+          placeholder: '请输入哦'
+        },
+        modelData2: {
+          value: '禁止输入',
           disabled: true,
-          placeholder: 'dkdsjklfds'
+          placeholder: '请输入哦'
         }
       };
     },

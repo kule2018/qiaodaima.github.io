@@ -8,7 +8,7 @@
       :disabled="disabled"
       :type="type"
       @input="input">
-    <i @click="clearvalue" class="btn-clear iconfont icon-error"></i>
+    <i v-show="value" @click="clearvalue" class="btn-clear iconfont icon-error"></i>
   </div>
 </template>
 
@@ -52,22 +52,25 @@
 </script>
 
 <style lang="scss" scoped>
-  .input-item{
+  .input-item {
     position: relative;
 
-    input{
+    input {
       display: block;
       padding: 0 10px;
-      width: 100%;
-      height: 34px;
+      width: 100%; height: 34px;
       border: 1px solid #ddd;
       border-radius: 4px;
 
-      &:disabled{
+      &:disabled {
         background: #f4f4f4;
+
+        & + .btn-clear {
+          display: none;
+        }
       }
     }
-    .btn-clear{
+    .btn-clear {
       position: absolute;
       top: 50%;right: 10px;
       transform: translate(0, -50%);
