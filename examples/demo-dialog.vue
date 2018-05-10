@@ -1,7 +1,9 @@
 <template>
   <div>
     <h1>对话框</h1>
-    <Dialog></Dialog >
+    <Dialog>
+      <div style="padding: 20px;">测试内容</div>
+    </Dialog >
   </div>
 </template>
 
