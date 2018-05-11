@@ -3,16 +3,22 @@
     <h2>{{title}}</h2>
 
     <blockquote  class="tip">
-      解释性的说明文字<br>
-      解释性的说明文字<br>
-      解释性的说明文字<br>
+      <slot name="tip"></slot>
     </blockquote>
 
     <dl class="doc-example">
       <dt>示例</dt>
       <dd>
-        <a class="btn" href="javascript:;">示例操作1</a>
-        <a class="btn" href="javascript:;">示例操作2</a>
+        <div v-if="tools && tools.length" class="tool-wrap">
+          <a
+            v-for="(tool, index) in tools"
+            :key="index"
+            @click="callbackTool(tool);"
+            class="btn"
+            href="javascript:;">
+            {{tool.text}}
+          </a>
+        </div>
         <slot name="example"></slot>
       </dd>
     </dl>
@@ -49,6 +55,21 @@
         type: String,
         default: '组件名 + 中文名'
       },
+      tools: {
+        type: Array,
+        default() {
+          return [
+            {
+              flag: '',
+              text: '示例操作1'
+            },
+            {
+              flag: '',
+              text: '示例操作2'
+            }
+          ];
+        }
+      },
       parameter: {
         default() {
           return [
@@ -61,6 +82,12 @@
             }
           ];
         }
+      }
+    },
+    methods: {
+      callbackTool(data) {
+        this.$emit('callbacktool', data);
+        console.log(data);
       }
     }
   };
@@ -86,7 +113,7 @@
     border-left: 5px solid #50bfff;
     background: #ecf8ff;
   }
-  .doc-example{
+  .doc-example {
     .btn {
       margin-left: 20px;
 
@@ -97,6 +124,11 @@
     dt {
       margin-bottom: 5px;
       font-size: 12px;
+    }
+    .tool-wrap {
+      & + * {
+        margin-top: 15px;;
+      }
     }
   }
   .api-table {
