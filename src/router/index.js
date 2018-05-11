@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import DemoNav from '../../examples/demo-nav.vue';
+import Doc from '../../examples/doc.vue';
 import DemoLoading from '../../examples/demo-loading.vue';
 import DemoCheckbox from '../../examples/demo-checkbox.vue';
 import DemoRadio from '../../examples/demo-radio.vue';
@@ -13,8 +13,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'DemoNav',
-      component: DemoNav
+      name: 'Doc',
+      component: Doc
     },
     {
       path: '/demo-loading',
