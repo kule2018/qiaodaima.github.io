@@ -2,7 +2,6 @@
   <div class="input-item">
     <input
       :value="value"
-      :minlength="minlength"
       :maxlength="maxlength"
       :placeholder="placeholder"
       :disabled="disabled"
@@ -17,19 +16,16 @@
     name: 'Input',
     props: {
       value: {
-        type: String
+        type: String,
+        required: true
       },
       placeholder: {
         type: String,
         default: '请输入'
       },
-      minlength: {
-        type: Number,
-        default: 0
-      },
       maxlength: {
         type: Number,
-        default: 1000
+        default: 20
       },
       type: {
         type: String,

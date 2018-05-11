@@ -24,7 +24,7 @@
     </dl>
 
     <table class="api-table">
-      <caption>props</caption>
+      <caption>props & event</caption>
       <thead>
         <tr>
           <th>属性</th>
@@ -35,12 +35,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(kk, index) in parameter" :key="index">
-          <td>{{kk.name}}</td>
-          <td>{{kk.explain}}</td>
-          <td>{{kk.type}}</td>
-          <td>{{kk.defaultValue}}</td>
-          <td>{{kk.isMust}}</td>
+        <tr v-for="(prop, index) in param" :key="index">
+          <td>{{prop.name}}</td>
+          <td>{{prop.explain}}</td>
+          <td>{{prop.type}}</td>
+          <td>{{prop.default}}</td>
+          <td>{{prop.isMust}}</td>
         </tr>
       </tbody>
     </table>
@@ -58,26 +58,17 @@
       tools: {
         type: Array,
         default() {
-          return [
-            {
-              flag: '',
-              text: '示例操作1'
-            },
-            {
-              flag: '',
-              text: '示例操作2'
-            }
-          ];
+          return [];
         }
       },
-      parameter: {
+      param: {
         default() {
           return [
             {
               name: '参数名',
               explain: '参数说明',
               type: '参数类型',
-              defaultValue: '参数的默认值',
+              default: '参数的默认值',
               isMust: '是否必传'
             }
           ];
