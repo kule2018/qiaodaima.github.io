@@ -1,11 +1,12 @@
 <template>
   <DocItem :title="'Input 输入框'" :param="param">
     <div slot="tip">数据是双向绑定的。默认表现为块级元素样式，即宽度占据一整行</div>
-    <div slot="example">
+
+    <template slot="example">
       <Input v-model="value" :maxlength="10" />
       <Input v-model="value" :placeholder="'请输入密码'" :type="'password'" />
       <Input v-model="value" :disabled="true" />
-    </div>
+    </template>
   </DocItem>
 </template>
 
@@ -14,7 +15,7 @@
   import Input from '../src/components/input/main.vue';
 
   export default {
-    name: 'DemoInput',
+    name: 'DocInput',
     components: {
       DocItem,
       Input
@@ -64,11 +65,12 @@
   };
 </script>
 
-<style>
-  .doc-item {
-    padding: 20px;
-  }
+<style lang="scss" scoped>
   .input-item {
-    margin-bottom: 20px;;
+    margin-top: 20px;
+
+    &:first-child {
+      margin-top: 0;
+    }
   }
 </style>

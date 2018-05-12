@@ -2,20 +2,17 @@
   <div class="doc-content">
     <h1>基础组件文档说明</h1>
 
-    <DocItem>
-      <div slot="tip">说明性的文字</div>
-      <div slot="example">外部引入的组件示例</div>
-    </DocItem>
+    <DocInput></DocInput>
   </div>
 </template>
 
 <script>
-  import DocItem from './doc-item.vue';
+  import DocInput from './doc-input.vue';
 
   export default {
     name: 'Doc',
     components: {
-      DocItem
+      DocInput
     }
   };
 </script>
