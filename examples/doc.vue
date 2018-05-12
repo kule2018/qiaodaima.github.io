@@ -5,6 +5,7 @@
     <DocInput></DocInput>
     <DocRadio></DocRadio>
     <DocCheckbox></DocCheckbox>
+    <DocDialog></DocDialog>
   </div>
 </template>
 
@@ -12,13 +13,15 @@
   import DocInput from './doc-input.vue';
   import DocRadio from './doc-radio.vue';
   import DocCheckbox from './doc-checkbox.vue';
+  import DocDialog from './doc-dialog.vue';
 
   export default {
     name: 'Doc',
     components: {
       DocInput,
       DocRadio,
-      DocCheckbox
+      DocCheckbox,
+      DocDialog
     }
   };
 </script>

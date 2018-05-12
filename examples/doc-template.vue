@@ -20,7 +20,7 @@
   import xxx from '../src/components/xxx/main.vue';
 
   export default {
-    name: 'Demoxxx',
+    name: 'Docxxx',
     components: {
       DocItem,
       xxx
