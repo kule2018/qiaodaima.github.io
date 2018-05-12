@@ -16,7 +16,7 @@
     name: 'Checkbox',
     props: {
       value: {
-        type: [String, Number, Boolean, Array],
+        type: Array,
         required: true
       },
       label: {
