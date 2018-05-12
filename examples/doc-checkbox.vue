@@ -81,6 +81,7 @@
   .group {
     display: inline-block;
     margin-left: 100px;
+
     &:first-child {
       margin-left: 0;
     }
