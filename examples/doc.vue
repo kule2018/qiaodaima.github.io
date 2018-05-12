@@ -3,16 +3,19 @@
     <h1>基础组件文档说明</h1>
 
     <DocInput></DocInput>
+    <DocRadio></DocRadio>
   </div>
 </template>
 
 <script>
   import DocInput from './doc-input.vue';
+  import DocRadio from './doc-radio.vue';
 
   export default {
     name: 'Doc',
     components: {
-      DocInput
+      DocInput,
+      DocRadio
     }
   };
 </script>

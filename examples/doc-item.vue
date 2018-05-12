@@ -112,7 +112,7 @@
         margin-left: 0;
       }
     }
-    dt {
+    & > dt {
       margin-bottom: 5px;
       font-size: 12px;
     }
