@@ -6,6 +6,7 @@
     <DocRadio></DocRadio>
     <DocCheckbox></DocCheckbox>
     <DocDialog></DocDialog>
+    <DocTransfer></DocTransfer>
   </div>
 </template>
 
@@ -14,6 +15,7 @@
   import DocRadio from './doc-radio.vue';
   import DocCheckbox from './doc-checkbox.vue';
   import DocDialog from './doc-dialog.vue';
+  import DocTransfer from './doc-transfer.vue';
 
   export default {
     name: 'Doc',
@@ -21,7 +23,8 @@
       DocInput,
       DocRadio,
       DocCheckbox,
-      DocDialog
+      DocDialog,
+      DocTransfer
     }
   };
 </script>
