@@ -61,8 +61,11 @@
       opacity: 0;
 
       &:disabled {
-        & + i {
+        & ~ i {
           background: #f8f4f4;
+        }
+        & ~ span {
+          color: #c0c4cc;
         }
       }
       &:checked {
