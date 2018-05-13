@@ -9,7 +9,7 @@
         <Checkbox v-model="value" :label="0" :text="'西红柿炒鸡蛋'"></Checkbox>
         <Checkbox v-model="value" :label="0" :text="'萝卜干爆蛋'"></Checkbox>
         <Checkbox v-model="value" :label="0" :text="'土豆炒牛肉'"></Checkbox>
-        <Checkbox v-model="value" :label="0" :text="'西红柿炒鸡蛋'"></Checkbox>
+        <Checkbox v-model="value" :label="0" :text="'西红柿炒鸡蛋'" :disabled="true"></Checkbox>
         <Checkbox v-model="value" :label="0" :text="'萝卜干爆蛋'"></Checkbox>
         <Checkbox v-model="value" :label="0" :text="'土豆炒牛肉'"></Checkbox>
       </div>
@@ -79,7 +79,7 @@
     }
     .content-wrap {
       float: left;
-      width: 180px;
+      width: calc(50% - 33px);
       border: 1px solid #ddd;
       border-radius: 6px;
       min-height: 180px;
@@ -99,6 +99,10 @@
       }
     }
     .list-wrap {
+
+      // &:first-child {
+
+      // }
       .checkbox-item {
         display: block;
         padding: 6px 10px;
@@ -121,6 +125,7 @@
     .checkbox-item {
       i {
         margin-right: 15px;
+        border-color: #dddee1;
       }
       span {
         font-size: 12px;
