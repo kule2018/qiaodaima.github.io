@@ -28,7 +28,13 @@
     data() {
       return {
         param: [
-          {}
+          {
+            name: '-',
+            explain: '-',
+            type: '-',
+            default: '-',
+            isMust: false
+          }
         ],
         tools: [
           {

@@ -5,7 +5,7 @@
       <div class="header">
         <i v-if="title.icon" :class="title.icon" class="iconfont"></i>
         <span class="title-text">{{title.text}}</span>
-        <i class="btn-close"></i>
+        <i @click="closeDialog" class="btn-close"></i>
       </div>
       <div class="content">
         <slot name="content"></slot>
@@ -47,18 +47,8 @@
           return [
             {
               flag: '',
-              theme: '',
+              theme: '', // 默认、primary、danger
               text: '默认按钮'
-            },
-            {
-              flag: '',
-              theme: 'primary',
-              text: '主要按钮'
-            },
-            {
-              flag: '',
-              theme: 'danger',
-              text: '危险按钮'
             }
           ];
         }
@@ -75,6 +65,10 @@
       }
     },
     methods: {
+      closeDialog() {
+        this.$emit('closedialog', null);
+        this.show = false;
+      },
       callback(result) {
         this.$emit('callback', result);
         console.log(result);
