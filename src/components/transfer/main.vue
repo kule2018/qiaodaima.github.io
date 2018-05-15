@@ -2,32 +2,39 @@
   <div class="transfer-item">
     <div class="content-wrap">
       <div class="title-wrap">
-        <!-- <Checkbox v-model="value" :label="0"></Checkbox> -->
-        <em class="number">1/14</em>
+        <Checkbox :label="0"></Checkbox>
+        <em class="number">{{moveToSelectData.length}}/{{unselectDtat.length}}</em>
       </div>
       <div class="list-wrap">
-        <!-- <Checkbox v-model="value" :label="0" :text="'西红柿炒鸡蛋'"></Checkbox> -->
+        <Checkbox
+          v-for="(select) in unselectDtat"
+          :key="select.id"
+          v-model="moveToSelectData"
+          :label="select.id"
+          :disabled="select.disabled"
+          :text="select.text">
+        </Checkbox>
       </div>
     </div>
 
     <div class="operation-wrap">
-      <a class="iconfont icon-left" href="javascript:;"></a>
-      <a class="iconfont icon-right" href="javascript:;"></a>
+      <a @click="moveToUnselect" class="iconfont icon-left" href="javascript:;"></a>
+      <a @click="moveToSelect" class="iconfont icon-right" href="javascript:;"></a>
     </div>
 
     <div class="content-wrap">
       <div class="title-wrap">
-        <!-- <Checkbox v-model="value" :label="0"></Checkbox> -->
-        <em class="number">1/14</em>
+        <Checkbox :label="0"></Checkbox>
+        <em class="number">{{moveToUnselectData.length}}/{{selectData.length}}</em>
       </div>
       <div class="list-wrap">
-        {{selectData}}
         <Checkbox
-          v-for="(select, index) in selectData"
-          :key="index"
-          v-model="kk"
-          :label="select.label"
-          :text="'西红柿炒鸡蛋'">
+          v-for="(select) in selectData"
+          :key="select.id"
+          v-model="moveToUnselectData"
+          :label="select.id"
+          :disabled="select.disabled"
+          :text="select.text">
         </Checkbox>
       </div>
     </div>
@@ -44,52 +51,75 @@
     },
     props: {
       value: {
-        default() {
-          return {
-            data: [
-              {
-                id: '1',
-                label: '选项1',
-                disabled: false
-              },
-              {
-                id: '2',
-                label: '选项2',
-                disabled: false
-              },
-              {
-                id: '3',
-                label: '选项3',
-                disabled: false
-              },
-              {
-                id: '4',
-                label: '选项4',
-                disabled: false
-              }
-            ],
-            selectIndex: [0, 1, 3, 4]
-          };
-        }
+        type: Array,
+        required: true
+      },
+      data: {
+        type: Array,
+        required: true
       }
     },
     computed: {
-      selectData() {
-        const _this = this;
-        let data = JSON.parse(JSON.stringify(_this.value.data));
-        let arr = [];
+      // 左侧数据
+      unselectDtat() {
+        let result = [];
 
-        for(let i = 0; i < _this.value.selectIndex.length; i++) {
-          arr.push(data.splice(_this.value.selectIndex[i], 1));
-          debugger;
+        for(let i = 0; i < this.data.length; i++) {
+          let isNoFind = true;
+
+          for(let j = 0; j < this.value.length; j++) {
+            if(this.data[i].id === this.value[j]) {
+              isNoFind = false;
+              break;
+            }
+          }
+          if(isNoFind) {
+            result.push(this.data[i]);
+          }
         }
-        return arr;
+        return result;
+      },
+
+      // 右侧数据
+      selectData() {
+        let result = [];
+        let temp = Array.from(new Set(this.value));
+
+        for(let i = 0; i < this.data.length; i++) {
+          for(let j = 0; j < temp.length; j++) {
+            if(this.data[i].id === temp[j]) {
+              result.push(this.data[i]);
+              break;
+            }
+          }
+        }
+        return result;
       }
     },
     data() {
       return {
-        kk: []
+        moveToSelectData: [], // 左侧已选的数据
+        moveToUnselectData: [] // 右侧已选的数据
       };
+    },
+    methods: {
+      // 把左侧数据 移动 到右侧
+      moveToSelect() {
+        let temp = JSON.parse(JSON.stringify(this.value));
+
+        temp.push(...this.moveToSelectData);
+        this.$emit('input', temp);
+      },
+
+      // 把右侧数据 移动 到左侧
+      moveToUnselect() {
+        let temp = JSON.parse(JSON.stringify(this.value));
+
+        for(let i = 0; i < this.moveToUnselectData.length; i++) {
+          temp.splice(temp.indexOf(this.moveToUnselectData[i]), 1);
+        }
+        this.$emit('input', temp);
+      }
     }
   };
 </script>

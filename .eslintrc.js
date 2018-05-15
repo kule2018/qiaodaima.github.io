@@ -73,7 +73,8 @@ module.exports = {
       1,
       {
         beforeLineComment: true,
-        beforeBlockComment: true
+        beforeBlockComment: true,
+        allowObjectStart: true
       }
     ],                                             // 注释前必须有空行
     'array-bracket-spacing': [1, 'never'],          // 数组[]内侧两头不要空格
