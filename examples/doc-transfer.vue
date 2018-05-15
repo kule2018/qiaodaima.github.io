@@ -5,7 +5,7 @@
     :tools="tools"
     @callbacktool="callbacktool">
     <div slot="tip">
-      目前还没写好哦~
+      默认表现为块级元素样式，高度已经固定
     </div>
 
     <template slot="example">
@@ -83,7 +83,7 @@
           '司马光',
           '王之涣'
         ];
-        let total = 30;
+        let total = 25;
 
         for(let i = 0; i < total; i++) {
           this.modelData.data.push({

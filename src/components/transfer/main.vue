@@ -2,7 +2,7 @@
   <div class="transfer-item">
     <div class="content-wrap">
       <div class="title-wrap">
-        <Checkbox :label="0"></Checkbox>
+        <Checkbox :label="true"></Checkbox>
         <em class="number">{{moveToSelectData.length}}/{{unselectDtat.length}}</em>
       </div>
       <div class="list-wrap">
@@ -24,7 +24,7 @@
 
     <div class="content-wrap">
       <div class="title-wrap">
-        <Checkbox :label="0"></Checkbox>
+        <Checkbox :label="true"></Checkbox>
         <em class="number">{{moveToUnselectData.length}}/{{selectData.length}}</em>
       </div>
       <div class="list-wrap">
@@ -98,27 +98,44 @@
     },
     data() {
       return {
+        unselectDtatCheckAll: [],
         moveToSelectData: [], // 左侧已选的数据
+
+        selectDataCheckAll: [],
         moveToUnselectData: [] // 右侧已选的数据
       };
+    },
+    watch: {
+      moveToSelectData(newValue) {
+        if(newValue.length === this.unselectDtat.length) {
+          console.log(888);
+        }
+      }
     },
     methods: {
       // 把左侧数据 移动 到右侧
       moveToSelect() {
-        let temp = JSON.parse(JSON.stringify(this.value));
+        let select = JSON.parse(JSON.stringify(this.value));
 
-        temp.push(...this.moveToSelectData);
-        this.$emit('input', temp);
+        if(!this.moveToSelectData.length) {
+          return;
+        }
+
+        select.push(...this.moveToSelectData);
+        this.moveToSelectData = [];
+        this.$emit('input', select);
       },
 
       // 把右侧数据 移动 到左侧
       moveToUnselect() {
-        let temp = JSON.parse(JSON.stringify(this.value));
+        let select = JSON.parse(JSON.stringify(this.value));
 
         for(let i = 0; i < this.moveToUnselectData.length; i++) {
-          temp.splice(temp.indexOf(this.moveToUnselectData[i]), 1);
+          select.splice(select.indexOf(this.moveToUnselectData[i]), 1);
         }
-        this.$emit('input', temp);
+
+        this.moveToUnselectData = [];
+        this.$emit('input', select);
       }
     }
   };
