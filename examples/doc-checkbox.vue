@@ -40,8 +40,8 @@
             name: 'v-model',
             explain: '复选框选中的值，必须是数组类型',
             type: 'Array',
-            default: '-',
-            isMust: true
+            default: '[]',
+            isMust: false
           },
           {
             name: 'label',

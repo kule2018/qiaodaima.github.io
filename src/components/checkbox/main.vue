@@ -17,7 +17,9 @@
     props: {
       value: {
         type: Array,
-        required: true
+        default() {
+          return [];
+        }
       },
       label: {
         type: [String, Number, Boolean],
