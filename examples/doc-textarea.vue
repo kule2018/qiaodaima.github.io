@@ -6,8 +6,7 @@
     </div>
 
     <template slot="example">
-      <Textarea v-model="value" :rows="5" :maxlength="10000"></Textarea>
-
+      <Textarea v-model="value" :rows="6" :maxlength="10000"></Textarea>
       <Textarea v-model="value" :disabled="true"></Textarea>
     </template>
   </DocItem>
