@@ -7,6 +7,7 @@
     <DocCheckbox></DocCheckbox>
     <DocDialog></DocDialog>
     <DocTransfer></DocTransfer>
+    <DocTextarea></DocTextarea>
   </div>
 </template>
 
@@ -16,6 +17,7 @@
   import DocCheckbox from './doc-checkbox.vue';
   import DocDialog from './doc-dialog.vue';
   import DocTransfer from './doc-transfer.vue';
+  import DocTextarea from './doc-textarea.vue';
 
   export default {
     name: 'Doc',
@@ -24,7 +26,8 @@
       DocRadio,
       DocCheckbox,
       DocDialog,
-      DocTransfer
+      DocTransfer,
+      DocTextarea
     }
   };
 </script>
