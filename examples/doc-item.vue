@@ -143,7 +143,7 @@
       &:nth-last-child(1),
       &:nth-last-child(2),
       &:nth-last-child(3) {
-        width: 100px;
+        width: 90px;
       }
     }
     thead {
