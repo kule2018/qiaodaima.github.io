@@ -8,6 +8,7 @@
     <DocDialog></DocDialog>
     <DocTransfer></DocTransfer>
     <DocTextarea></DocTextarea>
+    <DocAlert></DocAlert>
   </div>
 </template>
 
@@ -18,6 +19,7 @@
   import DocDialog from './doc-dialog.vue';
   import DocTransfer from './doc-transfer.vue';
   import DocTextarea from './doc-textarea.vue';
+  import DocAlert from './doc-alert.vue';
 
   export default {
     name: 'Doc',
@@ -27,7 +29,8 @@
       DocCheckbox,
       DocDialog,
       DocTransfer,
-      DocTextarea
+      DocTextarea,
+      DocAlert
     }
   };
 </script>
