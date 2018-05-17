@@ -67,6 +67,7 @@
       }
     }
     input[type="radio"] {
+      z-index: 1;
       position: absolute;
       left: 0;top: 0;
       width: 100%; height: 100%;
@@ -111,7 +112,6 @@
       border: 1px solid #dddee1;
       border-radius: 50%;
       vertical-align: middle;
-      cursor: pointer;
       transition: all 0.3s;
     }
     span {
