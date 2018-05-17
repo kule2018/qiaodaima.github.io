@@ -56,6 +56,19 @@
     position: relative;
     font-size: 0;
 
+    &:hover {
+      input[type="checkbox"] {
+        &:disabled {
+          & ~ i {
+            border-color: #dddee1;
+            cursor: not-allowed;
+          }
+        }
+      }
+      i {
+        border-color: #bcbcbc;
+      }
+    }
     input[type="checkbox"] {
       position: absolute;
       left: 0;top: 0;
@@ -98,9 +111,12 @@
       position: relative;
       width: 14px; height: 14px;
       margin-right: 6px;
-      border: 1px solid #9c9c9c;
+
+      border: 1px solid #dddee1;
       border-radius: 2px;
       vertical-align: middle;
+      cursor: pointer;
+      transition: all 0.3s;
     }
     span {
       line-height: 1;

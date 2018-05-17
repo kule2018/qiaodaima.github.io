@@ -2,7 +2,10 @@
   <DocItem :title="'Checkbox 复选框'" :param="param">
     <div slot="tip">
       vue的Checkbox操作，其实是将当前选项的值(label) 与 v-model绑定的值进行匹配，<br>
-      如果label的值 在 v-model中，则该选项被选中，否则未被选中，因此v-model值的类型 必须是数组类型 <br>
+      如果label的值 在 v-model中，则该选项被选中，否则未被选中，
+      哪怕您只用一个复选框，也必须传递数组类型的值来保存复选框的最终选择结果<br>
+      因此 v-model 值的类型被强制设置为数组，
+      以便于适应多个复选框使用的场景，<br>
       建议给name字段赋值，以便于区分标识
     </div>
 
