@@ -18,8 +18,18 @@
     </div>
 
     <div class="operation-wrap">
-      <a @click="moveToUnselect" class="iconfont icon-left" href="javascript:;"></a>
-      <a @click="moveToSelect" class="iconfont icon-right" href="javascript:;"></a>
+      <a
+        :class="{'disabled': moveToUnselectData.length === 0}"
+        @click="moveToUnselect"
+        class="iconfont icon-left"
+        href="javascript:;">
+      </a>
+      <a
+        :class="{'disabled': moveToSelectData.length === 0}"
+        @click="moveToSelect"
+        class="iconfont icon-right"
+        href="javascript:;">
+      </a>
     </div>
 
     <div class="content-wrap">
@@ -130,6 +140,10 @@
       moveToUnselect() {
         let select = JSON.parse(JSON.stringify(this.value));
 
+        if(!this.moveToUnselectData.length) {
+          return;
+        }
+
         for(let i = 0; i < this.moveToUnselectData.length; i++) {
           select.splice(select.indexOf(this.moveToUnselectData[i]), 1);
         }
@@ -159,11 +173,15 @@
         text-align: center;
         border-radius: 50%;
         color: #fff;
-        background: #ddd;
+        background: #f3f3f3;
         transition: all 0.3s;
 
         &:hover {
           background: #50bfff;
+
+          &.disabled {
+            background: #f3f3f3;
+          }
         }
         &:first-child {
           margin-bottom: 20px;
@@ -173,7 +191,7 @@
     .content-wrap {
       float: left;
       width: calc(50% - 33px); height: 100%;
-      border: 1px solid #ddd;
+      border: 1px solid #dddee1;
       border-radius: 6px;
       overflow: hidden;
 
@@ -191,6 +209,7 @@
           position: absolute;
           right: 10px; top: 50%;
           font-size: 12px;
+          color: #c0c4cc;
           transform: translate(0, -50%);
         }
       }

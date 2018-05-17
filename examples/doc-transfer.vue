@@ -1,15 +1,18 @@
 <template>
   <DocItem
     :title="'Transfer 穿梭框'"
-    :param="param"
-    :tools="tools"
-    @callbacktool="callbacktool">
+    :param="param">
     <div slot="tip">
       默认表现为块级元素样式，高度已经固定
     </div>
 
     <template slot="example">
-      <Transfer v-model="modelData.select" v-bind="modelData"></Transfer>
+      <dl class="group">
+        <dt>当前值：{{modelData.select}}</dt>
+        <dd>
+          <Transfer v-model="modelData.select" v-bind="modelData"></Transfer>
+        </dd>
+      </dl>
     </template>
   </DocItem>
 </template>
@@ -40,12 +43,6 @@
             type: 'Array',
             default: '-',
             isMust: true
-          }
-        ],
-        tools: [
-          {
-            flag: 'showSelectData',
-            text: '查看已选择的数据'
           }
         ],
         modelData: {
@@ -97,21 +94,17 @@
             this.modelData.select.push(i);
           }
         }
-      },
-      callbacktool(resutl) {
-        switch(resutl.flag) {
-          case 'showSelectData':
-            console.log(this.modelData.select);
-            alert(this.modelData.select);
-            break;
-          default:
-            break;
-        }
       }
     }
   };
 </script>
 
 <style lang="scss" scoped>
-  //
+  .group {
+    & > dt {
+      margin-bottom: 5px;
+      color: #999;
+      font-size: 12px;
+    }
+  }
 </style>
