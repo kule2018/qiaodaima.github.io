@@ -13,8 +13,10 @@
     </div>
 
     <template slot="example">
-      <Dialog v-model="modelData.show">
-        <div slot="content">自定义内容放在这边</div>
+      <Dialog v-model="modelData.show" v-bind="modelData">
+        <div style="height: 1000px;" slot="content">
+          <p v-for="(n, index) in 100" :key="index">自定义内容{{n}}</p>
+        </div>
       </Dialog>
     </template>
   </DocItem>
@@ -41,8 +43,15 @@
             isMust: false
           },
           {
+            name: 'shadeClose',
+            explain: '点击遮罩是否关闭对话框',
+            type: 'Boolean',
+            default: false,
+            isMust: false
+          },
+          {
             name: 'title',
-            explain: '对话框标题，若不需要小图标，对应参数不传递即可',
+            explain: '对话框标题，长度太长会自动截取。若不需要小图标，对应参数不传递即可',
             type: 'Object',
             default: {
               icon: 'icon-home',
@@ -85,7 +94,25 @@
           }
         ],
         modelData: {
-          show: false
+          show: false,
+          shadeClose: true,
+          buttons: [
+            {
+              flag: 'cancel',
+              theme: '',
+              text: '取消'
+            },
+            {
+              flag: 'del',
+              theme: 'danger',
+              text: '删除'
+            },
+            {
+              flag: 'ok',
+              theme: 'primary',
+              text: '确认'
+            }
+          ]
         }
       };
     },

@@ -1,7 +1,7 @@
 <template>
-  <div v-show="show" class="dialog-wrap">
+  <div v-show="show" @click="shadeCloseFn" class="dialog-wrap">
     <div class="mask"></div>
-    <div class="dialog-item">
+    <div @click.stop="" class="dialog-item">
       <div class="header">
         <i v-if="title.icon" :class="title.icon" class="iconfont"></i>
         <span class="title-text">{{title.text}}</span>
@@ -31,6 +31,10 @@
       value: {
         type: Boolean,
         default: true
+      },
+      shadeClose: {
+        type: Boolean,
+        default: false
       },
       title: {
         type: Object,
@@ -69,6 +73,11 @@
         this.$emit('closedialog', null);
         this.show = false;
       },
+      shadeCloseFn() {
+        if(this.shadeClose) {
+          this.$emit('input', false);
+        }
+      },
       callback(result) {
         this.$emit('callback', result);
         console.log(result);
@@ -91,7 +100,7 @@
   .dialog-item {
     position: absolute;
     left: 50%; top: 50%;
-    width: 620px;
+    width: 720px;
     box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.22);
     transform: translate(-50%, -50%);
     background: #fff;
@@ -128,7 +137,7 @@
     .content {
       position: relative;
       min-height: 400px;
-      max-height: 600px;
+      max-height: 450px;
       overflow-y: auto;
     }
     .tool-wrap {
