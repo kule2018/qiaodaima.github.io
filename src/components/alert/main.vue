@@ -43,6 +43,17 @@
           this.$emit('input', newValue);
         }
       }
+    },
+    watch: {
+      show(newValue) {
+        const _this = this;
+
+        if(newValue) {
+          setTimeout(function() {
+            _this.$emit('input', false);
+          }, 3000);
+        }
+      }
     }
   };
 </script>
