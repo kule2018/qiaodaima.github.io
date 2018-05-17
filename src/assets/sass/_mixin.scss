@@ -13,7 +13,6 @@
 // 水平垂直都居中
 @mixin levelVerticalCenter($x: -50%, $y: -50%) {
   position: absolute;
-  left: 50%; top: 50%;
   transform: translate($x, $y);
 }
 
