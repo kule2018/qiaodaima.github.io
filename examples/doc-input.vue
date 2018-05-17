@@ -1,6 +1,8 @@
 <template>
   <DocItem :title="'Input 输入框'" :param="param">
-    <div slot="tip">数据是双向绑定的。默认表现为块级元素样式，即宽度占据一整行</div>
+    <div slot="tip">
+      输入框的值是双向绑定的。默认表现为块级元素样式，即宽度占据一整行
+    </div>
 
     <template slot="example">
       <Input v-model="value" :maxlength="10" />
@@ -26,14 +28,14 @@
         param: [
           {
             name: 'v-model',
-            explain: '输入框的值',
+            explain: '绑定输入框的值',
             type: 'String',
             default: '-',
             isMust: true
           },
           {
             name: 'placeholder',
-            explain: '填写输入字段的提示',
+            explain: '输入框为空时的提示语',
             type: 'String',
             default: '请输入',
             isMust: false

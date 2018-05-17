@@ -55,23 +55,37 @@
       display: block;
       padding: 0 10px;
       width: 100%; height: 34px;
-      border: 1px solid #ddd;
+      border: 1px solid #dddee1;
       border-radius: 4px;
+      transition: all 0.3s;
 
       &:disabled {
-        background: #f4f4f4;
+        color: #aaa;
+        background: #f3f3f3;
 
         & + .btn-clear {
           display: none;
         }
+      }
+
+      &:hover:not(:disabled) {
+        border-color: #bcbcbc;
+      }
+      &:focus {
+        border-color: #409eff !important;
       }
     }
     .btn-clear {
       position: absolute;
       top: 50%;right: 10px;
       transform: translate(0, -50%);
-      color: #ccc;
+      color: #dddee1;
+      transition: all 0.3s;
       cursor: pointer;
+
+      &:hover {
+        color: #bcbcbc;
+      }
     }
   }
 </style>
