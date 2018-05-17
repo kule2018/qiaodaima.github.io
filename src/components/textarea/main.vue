@@ -8,10 +8,8 @@
       :disabled="disabled">
     </textarea>
     <i v-show="value" @click="clearvalue" class="btn-clear iconfont icon-error"></i>
-    <div class="num-words-tips">
-      <span class="count">{{valueCopy.length}}</span>
-      <em class="branch">&#8260;</em>
-      <span class="total">{{maxlength}}</span>
+    <div :class="{'error': valueCopy.length === maxlength}" class="num-words-tips">
+      {{valueCopy.length}} / {{maxlength}}
     </div>
   </div>
 </template>
@@ -67,31 +65,52 @@
       display: block;
       padding: 5px 25px 25px 10px;
       width: 100%;
-      border: 1px solid #ddd;
+      border: 1px solid #dddee1;
       border-radius: 4px;
       resize: vertical;
+      transition: all 0.3s;
 
+      &:hover {
+        border-color: #bcbcbc;
+      }
       &:disabled {
-        color: #999;
-        background: #f4f4f4;
+        resize: none;
+        color: #aaa;
+        background: #f3f3f3;
 
+        &:hover {
+          border-color: #dddee1;
+        }
         & ~ .btn-clear,
         & ~ .num-words-tips {
           display: none;
         }
       }
+      &:focus {
+        border-color: #409eff !important;
+      }
     }
     .btn-clear {
       position: absolute;
       top: 10px;right: 10px;
-      color: #ccc;
+      color: #dddee1;
+      transition: all 0.3s;
       cursor: pointer;
+
+      &:hover {
+        color: #bcbcbc;
+      }
     }
     .num-words-tips {
       position: absolute;
       right: 10px;bottom: 10px;
       font-size:12px;
-      color:#e1e1e1;
+      color:#999;
+
+      &.error {
+        font-weight: bold;
+        color: #ff5e5e;
+      }
     }
   }
 </style>
