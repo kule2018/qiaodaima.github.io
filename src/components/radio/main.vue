@@ -54,6 +54,18 @@
     position: relative;
     font-size: 0;
 
+    &:hover {
+      input[type="radio"] {
+        &:disabled {
+          & ~ i {
+            border-color: #dddee1;
+          }
+        }
+      }
+      i {
+        border-color: #bcbcbc;
+      }
+    }
     input[type="radio"] {
       position: absolute;
       left: 0;top: 0;
@@ -96,9 +108,11 @@
       position: relative;
       width: 14px; height: 14px;
       margin-right: 6px;
-      border: 1px solid #9c9c9c;
+      border: 1px solid #dddee1;
       border-radius: 50%;
       vertical-align: middle;
+      cursor: pointer;
+      transition: all 0.3s;
     }
     span {
       line-height: 1;
