@@ -10,34 +10,13 @@
     </div>
 
     <template slot="example">
-      <Alert
-        v-model="infoValue"
-        :theme="'info'"
-        :icon="'icon-busy'">
-        <a slot="content" href="https://github.com/qiaodaima/vue-base-ui">这个是自定义提示内容</a>
-      </Alert>
-
-      <Alert
-        v-model="successValue"
-        :theme="'success'"
-        :icon="'icon-success'"
-        :title="'成功提示'"
-        :subTitle="'某程序员说：“Apple是美工写代码，Google是码农做美工。”'">
-      </Alert>
-
-      <Alert
-        v-model="warningValue"
-        :theme="'warning'"
-        :title="'警告提示'"
-        :subTitle="'生活不仅只是敲代码，还有……调bug。'">
-      </Alert>
-
-      <Alert
-        v-model="errorValue"
-        :theme="'error'"
-        :icon="'icon-error'"
-        :title="'错误提示'"
-        :subTitle="'编程夜当午，手握小滑鼠。谁知编程辛，行行皆“心”苦；头昏不觉晓，使劲揉眼角。夜夜太辛苦，睡眠知多少'">
+      <Alert v-model="modelData.show" v-bind="modelData" @on-close="onClose">
+        <a
+          v-if="!modelData.title && !modelData.subTitle"
+          slot="content"
+          href="https://github.com/qiaodaima/vue-base-ui">
+            这个是自定义超链接提示内容
+        </a>
       </Alert>
     </template>
   </DocItem>
@@ -61,6 +40,13 @@
             explain: '控制显示 与 隐藏，值是双向绑定的',
             type: 'Boolean',
             default: false,
+            isMust: false
+          },
+          {
+            name: 'duration',
+            explain: '提示框需要显示多长时间，单位毫秒，默认3秒后消失。如果需要一直显示，传递0即可，此时会提供按钮方便手动关闭',
+            type: 'Number',
+            default: 3000,
             isMust: false
           },
           {
@@ -90,6 +76,13 @@
             type: 'String',
             default: '\'\'',
             isMust: false
+          },
+          {
+            name: 'on-close',
+            explain: '当duration设置为 0 时，手动关闭提示时的回调函数，无附带参数',
+            type: '-',
+            default: '-',
+            isMust: '-'
           }
         ],
         tools: [
@@ -110,30 +103,61 @@
             text: '错误提示'
           }
         ],
-        infoValue: false,
-        successValue: false,
-        warningValue: false,
-        errorValue: false
+        infoData: {
+          show: true,
+          theme: 'info',
+          icon: 'icon-busy',
+          title: '',
+          subTitle: ''
+        },
+        successData: {
+          show: true,
+          theme: 'success',
+          icon: 'icon-success',
+          title: '成功提示',
+          subTitle: '某程序员说：“Apple是美工写代码，Google是码农做美工。”'
+        },
+        warningData: {
+          show: true,
+          theme: 'warning',
+          icon: 'icon-busy',
+          title: '',
+          duration: 0,
+          subTitle: '生活不仅只是敲代码，还有……调bug。'
+        },
+        errorData: {
+          show: true,
+          theme: 'error',
+          icon: 'icon-error',
+          title: '错误提示',
+          subTitle: '编程夜当午，手握小滑鼠。谁知编程辛，行行皆“心”苦；头昏不觉晓，使劲揉眼角。夜夜太辛苦，睡眠知多少'
+        },
+        modelData: {
+          show: false
+        }
       };
     },
     methods: {
-      callbacktool(resutl) {
-        switch(resutl.flag) {
+      callbacktool(result) {
+        switch(result.flag) {
           case 'info':
-            this.infoValue = true;
+            this.modelData = JSON.parse(JSON.stringify(this.infoData));
             break;
           case 'success':
-            this.successValue = true;
+            this.modelData = JSON.parse(JSON.stringify(this.successData));
             break;
           case 'warning':
-            this.warningValue = true;
+            this.modelData = JSON.parse(JSON.stringify(this.warningData));
             break;
           case 'error':
-            this.errorValue = true;
+            this.modelData = JSON.parse(JSON.stringify(this.errorData));
             break;
           default:
             break;
         }
+      },
+      onClose() {
+        alert('您关闭了提示框');
       }
     }
   };
@@ -143,6 +167,13 @@
   .alert-item {
     a {
       text-decoration: underline;
+    }
+  }
+  .doc-example {
+    .tool-wrap {
+      & + * {
+        margin-top: 0;
+      }
     }
   }
 </style>

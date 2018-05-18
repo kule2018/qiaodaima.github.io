@@ -1,9 +1,10 @@
 <template>
   <div v-show="show" :class="theme" class="alert-item">
     <i :class="icon" class="icon iconfont"></i>
+    <i v-if="duration === 0" @click="onClose" class="btn-close iconfont icon-error"></i>
     <dl v-if="title.length || subTitle.length" class="content">
-      <dt v-if="title.length">{{title}}</dt>
-      <dd v-if="subTitle.length">{{subTitle}}~</dd>
+      <dt v-if="title.length" class="title">{{title}}</dt>
+      <dd v-if="subTitle.length" class="sub-title">{{subTitle}}~</dd>
     </dl>
     <slot name="content"></slot>
   </div>
@@ -16,6 +17,10 @@
       value: {
         type: Boolean,
         default: false
+      },
+      duration: {
+        type: Number,
+        default: 3000
       },
       theme: {
         type: String,
@@ -48,11 +53,17 @@
       show(newValue) {
         const _this = this;
 
-        if(newValue) {
+        if(_this.duration && newValue) {
           setTimeout(function() {
             _this.$emit('input', false);
-          }, 3000);
+          }, _this.duration);
         }
+      }
+    },
+    methods: {
+      onClose() {
+        this.show = false;
+        this.$emit('on-close', null);
       }
     }
   };
@@ -63,12 +74,18 @@
     z-index: 10;
     position: fixed;
     top: 20px; left: 50%;
-    padding: 10px 20px 10px 50px;
+    padding: 10px 20px 10px 45px;
     min-height: 40px;
     border-radius: 6px;
-    font-size: 12px;
     transform: translate(-50%, 0);
 
+    &:hover {
+      .btn-close {
+        right: -10px; top: -10px;
+        font-size: 20px;
+        color: rgba(237, 63, 20, 1);
+      }
+    }
     &.info {
       border: 1px solid #d5e8fc;
       background-color: #eaf4fe;
@@ -101,12 +118,30 @@
         color: #ed3f14;
       }
     }
-
+    dt.title {
+      margin-bottom: 5px;
+      line-height: 1;
+      font-size: 14px;
+      font-weight: bold;
+      color: #000;
+    }
+    dd.sub-title {
+      font-size: 12px;
+      color: #666;
+    }
     .icon {
       position: absolute;
       left: 15px; top: 50%;
-      font-size: 20px;
+      font-size: 18px;
       transform: translate(0, -50%);
+    }
+    .btn-close {
+      position: absolute;
+      right: -6px; top: -6px;
+      font-size: 12px;
+      color: rgba(237, 63, 20, 0.5);
+      cursor: pointer;
+      transition: all 0.3s;
     }
   }
 </style>
