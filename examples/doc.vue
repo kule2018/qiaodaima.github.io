@@ -9,6 +9,7 @@
     <DocTransfer></DocTransfer>
     <DocTextarea></DocTextarea>
     <DocAlert></DocAlert>
+    <DocSideBar></DocSideBar>
   </div>
 </template>
 
@@ -20,6 +21,7 @@
   import DocTransfer from './doc-transfer.vue';
   import DocTextarea from './doc-textarea.vue';
   import DocAlert from './doc-alert.vue';
+  import DocSideBar from './doc-side-bar.vue';
 
   export default {
     name: 'Doc',
@@ -30,7 +32,8 @@
       DocDialog,
       DocTransfer,
       DocTextarea,
-      DocAlert
+      DocAlert,
+      DocSideBar
     }
   };
 </script>
