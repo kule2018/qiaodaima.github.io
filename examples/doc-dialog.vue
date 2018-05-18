@@ -8,12 +8,17 @@
       对话框的显示与隐藏(v-model)字段是双向绑定的，其余字段都是单项绑定。对话框的主体部分不含任何 padding margin<br>
       自定义内容使用分发槽 slot="content" 来控制，当主体部分超过一定高度时会出现滚动条 <br>
       buttons 字段中的 text 字段是必须的，其余字段都是可选的，建议给按钮传递一个flag字段，
-      用于标识点击了哪个按钮，而不是用text字段来标识(这么做显得很low~) <br>
-      callback 回调事件返回的当前按钮对象格式取决于buttons字段的定义，
+      用于标识点击了哪个按钮，而不是用 text 字段来标识(这么做显得很low~) <br>
+      on-buttons 回调事件返回的当前按钮对象格式取决于 buttons 字段中的定义，
     </div>
 
     <template slot="example">
-      <Dialog v-model="modelData.show" v-bind="modelData">
+      <Dialog
+        v-model="modelData.show"
+        v-bind="modelData"
+        @on-close="onClose"
+        @on-shade="onShade"
+        @on-buttons="onButtons">
         <div style="height: 1000px;" slot="content">
           <p v-for="(n, index) in 100" :key="index">自定义内容{{n}}</p>
         </div>
@@ -73,14 +78,21 @@
             isMust: false
           },
           {
-            name: 'closedialog',
-            explain: '标题右侧关闭弹窗回调事件，无附带数据',
+            name: 'on-close',
+            explain: '点击标题右侧关闭按钮的（会关闭弹窗）回调事件，无附带数据',
             type: '-',
             default: '-',
             isMust: '-'
           },
           {
-            name: 'callback',
+            name: 'on-shade',
+            explain: '点击遮罩层的回调事件，无附带数据',
+            type: '-',
+            default: '-',
+            isMust: '-'
+          },
+          {
+            name: 'on-buttons',
             explain: '底部按钮点击回调事件，附带当前按钮对象',
             type: '-',
             default: '-',
@@ -128,6 +140,16 @@
           default:
             break;
         }
+      },
+      onClose() {
+        alert('您点击了标题右侧的关闭按钮');
+      },
+      onShade() {
+        alert('您点击了遮罩层');
+      },
+      onButtons(button) {
+        alert('您点击了底部按钮，请在控制台查看调试数据');
+        console.log(button);
       }
     }
   };

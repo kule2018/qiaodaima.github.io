@@ -1,11 +1,11 @@
 <template>
-  <div v-show="show" @click="shadeCloseFn" class="dialog-wrap">
-    <div class="mask"></div>
-    <div @click.stop="" class="dialog-item">
+  <div v-show="show" class="dialog-wrap">
+    <div @click="onShade" class="mask"></div>
+    <div class="dialog-item">
       <div class="header">
         <i v-if="title.icon" :class="title.icon" class="iconfont"></i>
         <span class="title-text">{{title.text}}</span>
-        <i @click="closeDialog" class="btn-close"></i>
+        <i @click="onClose" class="btn-close"></i>
       </div>
       <div class="content">
         <slot name="content"></slot>
@@ -13,7 +13,7 @@
       <div class="tool-wrap">
         <a
           v-for="(button, index) in buttons"
-          @click="callback(button);"
+          @click="onButtons(button);"
           :class="button.theme"
           :key="index"
           href="javascript:;">
@@ -69,18 +69,19 @@
       }
     },
     methods: {
-      closeDialog() {
-        this.$emit('closedialog', null);
+      onClose() {
+        this.$emit('on-close', null);
         this.show = false;
       },
-      shadeCloseFn() {
+      onShade() {
+        this.$emit('on-shade', null);
+
         if(this.shadeClose) {
-          this.$emit('input', false);
+          this.show = false;
         }
       },
-      callback(result) {
-        this.$emit('callback', result);
-        console.log(result);
+      onButtons(button) {
+        this.$emit('on-buttons', button);
       }
     }
   };
@@ -107,8 +108,7 @@
 
     .header {
       position: relative;
-      padding: 10px;
-      border-bottom: solid 1px #eee;
+      padding: 3px 10px;
 
       .title-text {
         max-width: 95%;
@@ -119,18 +119,20 @@
       }
       .btn-close {
         position: absolute;
-        right: 10px; top: 50%;
-        line-height: 1;
+        top: 0; right: 0; bottom: 0;
+        padding: 0 7px;
+        line-height: 30px;
         font-size: 16px;
-        transform: translate(0, -50%);
         cursor: pointer;
+        transition: all 0.3s;
 
         &:before {
           content: "\e60a";
           font-family: "iconfont" !important;
         }
         &:hover {
-          color: #ff5e5e;
+          color: #fff;
+          background: #ff5e5e;
         }
       }
     }
