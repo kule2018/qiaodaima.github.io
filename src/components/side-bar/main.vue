@@ -1,5 +1,5 @@
 <template>
-  <div v-show="show" class="side-bar-item">
+  <div @click="stopBubble" v-show="show" class="side-bar-item">
     <div class="header">
       <i v-if="title.icon" :class="title.icon" class="iconfont"></i>
       <span class="title-text">{{title.text}}</span>
@@ -54,6 +54,10 @@
             }
           ];
         }
+      },
+      abledBlur: {
+        type: Boolean,
+        default: true
       }
     },
     computed: {
@@ -66,9 +70,26 @@
         }
       }
     },
+    mounted() {
+      const _this = this;
+
+      if(this.abledBlur) {
+          document.addEventListener('click', function() {
+          // 如果组件已经是隐藏状态，则不需要再隐藏，否则就会导致组件无法正常显示
+          if(_this.show) {
+            _this.show = false;
+          }
+        });
+      }
+    },
     methods: {
       onButtons(button) {
         this.$emit('on-buttons', button);
+      },
+      stopBubble(e) {
+        if(this.abledBlur) {
+          e.stopPropagation();
+        }
       }
     }
   };

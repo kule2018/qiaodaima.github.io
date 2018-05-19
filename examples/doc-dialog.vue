@@ -18,7 +18,7 @@
         v-model="modelData.show"
         v-bind="modelData"
         @on-close="onClose"
-        @on-shade="onShade"
+        @on-mask="onMask"
         @on-buttons="onButtons">
         <div style="height: 1000px;" slot="content">
           <p v-for="(n, index) in 100" :key="index">自定义内容{{n}}</p>
@@ -49,7 +49,7 @@
             isMust: false
           },
           {
-            name: 'shadeClose',
+            name: 'abled-mask',
             explain: '点击遮罩是否关闭对话框',
             type: 'Boolean',
             default: false,
@@ -86,7 +86,7 @@
             isMust: '-'
           },
           {
-            name: 'on-shade',
+            name: 'on-mask',
             explain: '点击遮罩层的回调事件，无附带数据',
             type: '-',
             default: '-',
@@ -108,7 +108,7 @@
         ],
         modelData: {
           show: false,
-          shadeClose: true,
+          abledMask: true,
           buttons: [
             {
               flag: 'cancel',
@@ -145,7 +145,7 @@
       onClose() {
         alert('您点击了标题右侧的关闭按钮');
       },
-      onShade() {
+      onMask() {
         alert('您点击了遮罩层');
       },
       onButtons(button) {

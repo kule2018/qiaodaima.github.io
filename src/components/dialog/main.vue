@@ -1,6 +1,6 @@
 <template>
   <div v-show="show" class="dialog-wrap">
-    <div @click="onShade" class="mask"></div>
+    <div @click="onMask" class="mask"></div>
     <div class="dialog-item">
       <div class="header">
         <i v-if="title.icon" :class="title.icon" class="iconfont"></i>
@@ -32,7 +32,7 @@
         type: Boolean,
         default: true
       },
-      shadeClose: {
+      abledMask: {
         type: Boolean,
         default: false
       },
@@ -78,10 +78,10 @@
         this.$emit('on-close', null);
         this.show = false;
       },
-      onShade() {
-        this.$emit('on-shade', null);
+      onMask() {
+        this.$emit('on-mask', null);
 
-        if(this.shadeClose) {
+        if(this.abledMask) {
           this.show = false;
         }
       },

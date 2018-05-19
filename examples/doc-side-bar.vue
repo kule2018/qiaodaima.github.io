@@ -53,6 +53,13 @@
             isMust: false
           },
           {
+            name: 'abled-blur',
+            explain: '当点击页面其它地方（非当前组件本身），是否需要自动隐藏侧边栏',
+            type: 'Boolean',
+            default: true,
+            isMust: false
+          },
+          {
             name: 'buttons',
             explain: '底部按钮,主题有三种可选 默认、primary、danger，默认提供两个按钮，确认和取消',
             type: 'Array',
