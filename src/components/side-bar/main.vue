@@ -75,6 +75,7 @@
 
       if(this.abledBlur) {
           document.addEventListener('click', function() {
+
           // 如果组件已经是隐藏状态，则不需要再隐藏，否则就会导致组件无法正常显示
           if(_this.show) {
             _this.show = false;
