@@ -1,10 +1,13 @@
 <template>
-  <div class="side-bar-item">
+  <div v-show="show" class="side-bar-item">
     <div class="header">
       <i v-if="title.icon" :class="title.icon" class="iconfont"></i>
       <span class="title-text">{{title.text}}</span>
+      <slot name="header"></slot>
     </div>
-    <div class="content">00</div>
+    <div class="content">
+      <slot name="content"></slot>
+    </div>
     <div class="footer">
       <a
         v-for="(button, index) in buttons"
@@ -24,14 +27,14 @@
     props: {
       value: {
         type: Boolean,
-        default: true
+        default: false
       },
       title: {
         type: Object,
         default() {
           return {
-            icon: 'icon-home',
-            text: '对话框标题'
+            icon: '-',
+            text: '侧边栏标题'
           };
         }
       },
@@ -40,19 +43,14 @@
         default() {
           return [
             {
-              flag: '',
-              theme: '', // 默认、primary、danger
-              text: '默认按钮'
+              flag: 'cancel',
+              theme: '',
+              text: '取消'
             },
             {
-              flag: '',
-              theme: 'primary', // 默认、primary、danger
-              text: '默认按钮'
-            },
-            {
-              flag: '',
-              theme: 'danger', // 默认、primary、danger
-              text: '默认按钮'
+              flag: 'confirm',
+              theme: 'primary',
+              text: '确定'
             }
           ];
         }
@@ -73,21 +71,21 @@
         this.$emit('on-buttons', button);
       }
     }
-  }
+  };
 </script>
 
 <style lang="scss" scoped>
   .side-bar-item {
     z-index: 10;
     position: fixed;
-    right: 30px; top: 0; bottom: 0;
+    right: 0; top: 0; bottom: 0;
     width: 360px;
     background: #fff;
     box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.22);
 
     .header {
       position: relative;
-      padding: 3px 10px;
+      padding: 5px 10px;
 
       .title-text {
         max-width: 95%;
@@ -99,20 +97,22 @@
     }
     .content {
       position: relative;
-      height: calc(100% - 88px);
+      height: calc(100% - 32px - 44px);
       overflow-y: auto;
     }
     .footer {
       position: relative;
-      padding: 15px;
+      padding: 10px 20px;
       font-size: 0;
       text-align: right;
+
       a {
         margin-left: 10px;
-        padding: 5px 15px;
+        padding: 2px 12px;
         border: 1px solid #ddd;
         border-radius: 4px;
         font-size: 12px;
+
         &:hover{
           opacity: 0.85;
         }
