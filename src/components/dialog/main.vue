@@ -10,7 +10,7 @@
       <div class="content">
         <slot name="content"></slot>
       </div>
-      <div class="tool-wrap">
+      <div class="footer">
         <a
           v-for="(button, index) in buttons"
           @click="onButtons(button);"
@@ -142,15 +142,15 @@
       max-height: 450px;
       overflow-y: auto;
     }
-    .tool-wrap {
+    .footer {
       position: relative;
-      padding: 15px;
+      padding: 10px 20px;
       font-size: 0;
       text-align: right;
 
       a {
         margin-left: 10px;
-        padding: 5px 15px;
+        padding: 2px 12px;
         border: 1px solid #ddd;
         border-radius: 4px;
         font-size: 12px;
