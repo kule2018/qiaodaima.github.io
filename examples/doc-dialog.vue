@@ -1,14 +1,15 @@
 <template>
   <DocItem
     :title="'Dialog 对话框'"
-    :tools="tools"
+    :testButtons="testButtons"
     :param="param"
-    @callbacktool="callbacktool">
+    @on-test="onTest">
     <div slot="tip">
-      对话框的显示与隐藏(v-model)字段是双向绑定的，其余字段都是单项绑定。对话框的主体部分不含任何 padding margin<br>
-      自定义内容使用分发槽 slot="content" 来控制，当主体部分超过一定高度时会出现滚动条 <br>
+      对话框的主体部分默认不含任何 padding margin<br>
+      主体自定义内容 使用分发槽 slot="content" 来控制，当主体部分超过一定高度时会出现滚动条 <br>
       buttons 字段中的 text 字段是必须的，其余字段都是可选的，建议给按钮传递一个flag字段，
       用于标识点击了哪个按钮，而不是用 text 字段来标识(这么做显得很low~) <br>
+      buttons 字段的默认值为 确认 和 取消 两个按钮，文档中的默认值仅仅是数据格式（表格太小，展示字段有限）<br>
       on-buttons 回调事件返回的当前按钮对象格式取决于 buttons 字段中的定义，
     </div>
 
@@ -59,7 +60,7 @@
             explain: '对话框标题，长度太长会自动截取。若不需要小图标，对应参数不传递即可',
             type: 'Object',
             default: {
-              icon: 'icon-home',
+              icon: '',
               text: '对话框标题'
             },
             isMust: false
@@ -99,7 +100,7 @@
             isMust: '-'
           }
         ],
-        tools: [
+        testButtons: [
           {
             flag: 'showDialog',
             text: '显示对话框'
@@ -132,8 +133,8 @@
       showDialog() {
         this.modelData.show = true;
       },
-      callbacktool(resutl) {
-        switch(resutl.flag) {
+      onTest(button) {
+        switch(button.flag) {
           case 'showDialog':
             this.showDialog();
             break;

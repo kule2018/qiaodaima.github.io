@@ -9,14 +9,14 @@
     <dl class="doc-example">
       <dt>示例</dt>
       <dd>
-        <div v-if="tools && tools.length" class="tool-wrap">
+        <div v-if="testButtons && testButtons.length" class="tool-wrap">
           <a
-            v-for="(tool, index) in tools"
+            v-for="(button, index) in testButtons"
             :key="index"
-            @click="callbackTool(tool);"
+            @click="onTest(button);"
             class="btn"
             href="javascript:;">
-            {{tool.text}}
+            {{button.text}}
           </a>
         </div>
         <slot name="example"></slot>
@@ -55,7 +55,7 @@
         type: String,
         default: '组件名 + 中文名'
       },
-      tools: {
+      testButtons: {
         type: Array,
         default() {
           return [];
@@ -76,9 +76,9 @@
       }
     },
     methods: {
-      callbackTool(data) {
-        this.$emit('callbacktool', data);
-        console.log(data);
+      onTest(button) {
+        this.$emit('on-test', button);
+        console.log(button);
       }
     }
   };
@@ -86,7 +86,7 @@
 
 <style lang="scss" scoped>
   .btn {
-    padding: 5px 15px;
+    padding: 2px 12px;
     border: 1px solid #0079ff;
     border-radius: 4px;
     font-size: 12px;

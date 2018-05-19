@@ -1,16 +1,23 @@
 <template>
   <DocItem
     :title="'SideBar 侧边弹窗'"
+    :testButtons="testButtons"
     :param="param"
-    :tools="tools">
+    @on-test="onTest">
     <div slot="tip">
       侧边栏顶部可以使用分发槽 slot="header" 来自定义内容, 此时建议 title字段都传递空值来避免干扰界面布局<br>
-      主体自定义内容使用分发槽 slot="content" 来控制，<br>
-      buttons 字段的默认值为 确认 和 取消 两个按钮，文档中的默认值仅仅是数据格式（表格太小，展示字段有限）
+      主体自定义内容使用分发槽 slot="content" 来控制，当主体部分超过一定高度时会出现滚动条 <br>
+      buttons 字段中的 text 字段是必须的，其余字段都是可选的，建议给按钮传递一个flag字段，
+      用于标识点击了哪个按钮，而不是用 text 字段来标识(这么做显得很low~) <br>
+      buttons 字段的默认值为 确认 和 取消 两个按钮，文档中的默认值仅仅是数据格式（表格太小，展示字段有限）<br>
+      on-buttons 回调事件返回的当前按钮对象格式取决于 buttons 字段中的定义，
     </div>
 
     <template slot="example">
-      <SideBar></SideBar>
+      <SideBar
+        v-model="modelData.show"
+        v-bind="modelData"
+        @on-buttons="onButtons"></SideBar>
     </template>
   </DocItem>
 </template>
@@ -40,7 +47,7 @@
             explain: '对话框标题，长度太长会自动截取。若不需要小图标，对应参数不传递即可',
             type: 'Object',
             default: {
-              icon: '-',
+              icon: '',
               text: '侧边栏标题'
             },
             isMust: false
@@ -57,22 +64,68 @@
               }
             ],
             isMust: false
+          },
+          {
+            name: 'on-buttons',
+            explain: '底部按钮点击回调事件，附带当前按钮对象',
+            type: '-',
+            default: '-',
+            isMust: '-'
           }
         ],
-        tools: [
+        testButtons: [
           {
-            flag: '',
+            flag: 'showSideBar',
             text: '显示侧边弹窗'
           }
-        ]
+        ],
+        modelData: {
+          show: false,
+          buttons: [
+            {
+              flag: 'cancel',
+              theme: '',
+              text: '取消'
+            },
+            {
+              flag: 'del',
+              theme: 'danger',
+              text: '删除'
+            },
+            {
+              flag: 'ok',
+              theme: 'primary',
+              text: '确认'
+            }
+          ]
+        }
       };
     },
     methods: {
-      //
+      showSideBar() {
+        this.modelData.show = true;
+      },
+      onTest(button) {
+        switch(button.flag) {
+          case 'showSideBar':
+            this.showSideBar();
+            break;
+          default:
+            break;
+        }
+      },
+      onButtons(button) {
+        alert('您点击了底部按钮，请在控制台查看调试数据');
+        console.log(button);
+      }
     }
   };
 </script>
 
 <style lang="scss" scoped>
-  //
+  .doc-example .tool-wrap {
+    & + .side-bar-item {
+      margin-top: 0;
+    }
+  }
 </style>

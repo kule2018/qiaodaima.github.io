@@ -2,38 +2,38 @@
   <div class="doc-content">
     <h1>基础组件文档说明</h1>
 
+    <DocDialog></DocDialog>
+    <DocSideBar></DocSideBar>
+    <DocAlert></DocAlert>
+    <DocTransfer></DocTransfer>
     <DocInput></DocInput>
     <DocRadio></DocRadio>
     <DocCheckbox></DocCheckbox>
-    <DocDialog></DocDialog>
-    <DocTransfer></DocTransfer>
     <DocTextarea></DocTextarea>
-    <DocAlert></DocAlert>
-    <DocSideBar></DocSideBar>
   </div>
 </template>
 
 <script>
+  import DocDialog from './doc-dialog.vue';
+  import DocSideBar from './doc-side-bar.vue';
+  import DocAlert from './doc-alert.vue';
+  import DocTransfer from './doc-transfer.vue';
   import DocInput from './doc-input.vue';
   import DocRadio from './doc-radio.vue';
   import DocCheckbox from './doc-checkbox.vue';
-  import DocDialog from './doc-dialog.vue';
-  import DocTransfer from './doc-transfer.vue';
   import DocTextarea from './doc-textarea.vue';
-  import DocAlert from './doc-alert.vue';
-  import DocSideBar from './doc-side-bar.vue';
 
   export default {
     name: 'Doc',
     components: {
+      DocDialog,
+      DocSideBar,
+      DocAlert,
+      DocTransfer,
       DocInput,
       DocRadio,
       DocCheckbox,
-      DocDialog,
-      DocTransfer,
-      DocTextarea,
-      DocAlert,
-      DocSideBar
+      DocTextarea
     }
   };
 </script>

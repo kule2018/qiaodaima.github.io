@@ -33,7 +33,7 @@
         type: Object,
         default() {
           return {
-            icon: '-',
+            icon: '',
             text: '侧边栏标题'
           };
         }

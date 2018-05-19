@@ -40,7 +40,7 @@
         type: Object,
         default() {
           return {
-            icon: 'icon-home',
+            icon: '',
             text: '对话框标题'
           };
         }
@@ -50,9 +50,14 @@
         default() {
           return [
             {
-              flag: '',
-              theme: '', // 默认、primary、danger
-              text: '默认按钮'
+              flag: 'cancel',
+              theme: '',
+              text: '取消'
+            },
+            {
+              flag: 'confirm',
+              theme: 'primary',
+              text: '确定'
             }
           ];
         }

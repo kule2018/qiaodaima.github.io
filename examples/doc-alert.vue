@@ -1,9 +1,9 @@
 <template>
   <DocItem
     :title="'Alert 提示'"
+    :testButtons="testButtons"
     :param="param"
-    :tools="tools"
-    @callbacktool="callbacktool">
+    @on-test="onTest">
     <div slot="tip">
       如果默认排版不满足您的需求，您也可以使用分发槽 slot="content" 来自定义内容，
       此时建议title subTitle都传递为空，避免干扰您的排版,
@@ -85,7 +85,7 @@
             isMust: '-'
           }
         ],
-        tools: [
+        testButtons: [
           {
             flag: 'info',
             text: '信息提示'
@@ -138,8 +138,8 @@
       };
     },
     methods: {
-      callbacktool(result) {
-        switch(result.flag) {
+      onTest(button) {
+        switch(button.flag) {
           case 'info':
             this.modelData = JSON.parse(JSON.stringify(this.infoData));
             break;
