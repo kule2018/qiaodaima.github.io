@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-
 import Doc from '../../examples/doc.vue';
 
 Vue.use(Router);
@@ -10,6 +9,10 @@ export default new Router({
   routes: [
     {
       path: '/',
+      component: Doc
+    },
+    {
+      path: '/doc',
       name: 'Doc',
       component: Doc
     }
