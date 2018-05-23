@@ -22,22 +22,21 @@ Axios.interceptors.response.use(data => {
 });
 
 // 请求实例
-function axiosAjax(options, callback) {
+export default function axiosAjax(options) {
   let defaultOptions = {
     method: 'get',
-    url: ''
+    url: '',
+    callback: null
   };
 
   defaultOptions = Object.assign({}, defaultOptions, options);
 
   Axios(defaultOptions)
     .then(response => {
-      callback && callback(response.data);
+      options.callback && options.callback(response.data);
     })
     .catch(error => {
       console.log('封装这边的失败');
       console.log(error);
     });
 }
-
-export default axiosAjax;

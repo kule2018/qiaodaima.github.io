@@ -4,22 +4,21 @@ const baseURL = 'http://www.wahaha.com';
 
 // 用户登入
 Mock.mock(`${baseURL}/login`, {
-  'msg': 'string',
-  'msgCode': 0,
-  'msgDesc': 'string',
-  'result': {},
-  'subMsg': 'string',
-  'subMsgCode': 'string'
-});
-
-// 获取用户信息
-Mock.mock(`${baseURL}/getUserInfo`, {
-  'msg': 'string',
-  'msgCode': 0,
-  'msgDesc': 'string',
-  'result': {},
-  'subMsg': 'string',
-  'subMsgCode': 'string'
+  'msg': 'im msg',
+  'msgCode': 200,
+  'msgDesc': 'im msgDesc',
+  'result': {
+    'avatar': 'aaabbcc',
+    'userName': '@cname',
+    'token': 'string',
+    'userNumber|1': [66208688, 66071007, 66145044, 66889932],
+    'email': '@email',
+    'mobile': '@mobile',
+    'nickName': '@name',
+    'sex|1': [0, 1]
+  },
+  'subMsg': 'im subMsg',
+  'subMsgCode': 'im subMsgCode'
 });
 
 // 编辑用户信息

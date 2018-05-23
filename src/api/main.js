@@ -10,15 +10,6 @@ export function login(callback) {
   axiosAjax(options, callback);
 }
 
-// 获取用户信息
-export function getUserInfo(callback) {
-  let options = {
-    url: '/getUserInfo'
-  };
-
-  axiosAjax(options, callback);
-}
-
 // 编辑用户信息
 export function editUserInfo(callback) {
   let options = {
