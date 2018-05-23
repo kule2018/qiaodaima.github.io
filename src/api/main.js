@@ -1,23 +1,38 @@
-import axios from 'axios';
+import axiosAjax from './axios-base.js'
 import './mock.js';
 
-axios.defaults.timeout = 5000;
-axios.defaults.baseURL = 'http://www.qiaodaima.me';
-axios.interceptors.request.use((config) => {
-  console.log('请求中...');
-  return config;
-});
-
+// 用户登入
 export function login(callback) {
-  axios({
-    method: 'post',
+  let options = {
     url: '/login'
-  })
-  .then(function(response) {
-    console.log(response);
-    callback && callback(response);
-  })
-  .catch(function(error) {
-    console.log(error);
-  });
-}
+  };
+
+  axiosAjax(options, callback);
+};
+
+// 获取用户信息
+export function getUserInfo() {
+  let options = {
+    url: '/getUserInfo'
+  };
+
+  axiosAjax(options, callback);
+};
+
+// 编辑用户信息
+export function editUserInfo() {
+  let options = {
+    url: '/editUserInfo'
+  };
+
+  axiosAjax(options, callback);
+};
+
+// 获取用户列表
+export function getUserLIst() {
+  let options = {
+    url: '/getUserLIst'
+  };
+
+  axiosAjax(options, callback);
+};

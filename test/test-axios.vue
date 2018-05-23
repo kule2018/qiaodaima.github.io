@@ -1,15 +1,12 @@
 <template>
-  <div>测试</div>
+  <div>TestAxios</div>
 </template>
 
 <script>
-  import {login} from '../src/api/main.js';
-
   export default {
-    name: 'Test',
+    name: 'TestAxios',
     mounted() {
       console.log('122');
-      login();
     }
   };
 </script>
