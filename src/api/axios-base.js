@@ -36,6 +36,7 @@ function axiosAjax(options, callback) {
     })
     .catch(error => {
       console.log('封装这边的失败');
+      console.log(error);
     });
 }
 

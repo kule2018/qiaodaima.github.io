@@ -3,14 +3,19 @@
 </template>
 
 <script>
+  import {login} from '../src/api/main.js';
+
   export default {
     name: 'TestAxios',
     mounted() {
-      console.log('122');
+      console.log(66);
+      login(function(result) {
+        console.log(result);
+      });
     }
   };
 </script>
 
 <style lang="scss" scoped>
-//
+  //
 </style>
