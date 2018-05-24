@@ -1,5 +1,9 @@
 <template>
-  <DocItem :title="'xxx xxx'" :param="param">
+  <DocItem
+    :title="'Loading 加载动画'"
+    :testButtons="testButtons"
+    :param="param"
+    @on-test="onTest">
     <div slot="tip">
       <!--  -->
     </div>
@@ -36,7 +40,7 @@
             isMust: false
           }
         ],
-        tools: [
+        testButtons: [
           {
             flag: '',
             text: '示例操作1'
@@ -45,7 +49,14 @@
       };
     },
     methods: {
-      //
+      onTest(button) {
+        switch(button.flag) {
+          case '':
+            break;
+          default:
+            break;
+        }
+      },
     }
   };
 </script>

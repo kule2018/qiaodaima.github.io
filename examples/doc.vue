@@ -6,6 +6,7 @@
     <DocSideBar></DocSideBar>
     <DocAlert></DocAlert>
     <DocTransfer></DocTransfer>
+    <DocLoading></DocLoading>
     <DocInput></DocInput>
     <DocRadio></DocRadio>
     <DocCheckbox></DocCheckbox>
@@ -18,10 +19,12 @@
   import DocSideBar from './doc-side-bar.vue';
   import DocAlert from './doc-alert.vue';
   import DocTransfer from './doc-transfer.vue';
+  import DocLoading from './doc-loading.vue';
   import DocInput from './doc-input.vue';
   import DocRadio from './doc-radio.vue';
   import DocCheckbox from './doc-checkbox.vue';
   import DocTextarea from './doc-textarea.vue';
+
 
   export default {
     name: 'Doc',
@@ -30,6 +33,7 @@
       DocSideBar,
       DocAlert,
       DocTransfer,
+      DocLoading,
       DocInput,
       DocRadio,
       DocCheckbox,

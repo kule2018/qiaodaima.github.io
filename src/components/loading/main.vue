@@ -1,15 +1,17 @@
 <template>
-  <div v-if="display" class="loading-item">
-    <i :class="[icon]" class="iconfont"></i>
-    <span>{{text}}</span>
+  <div v-show="show" class="loading-item">
+    <div class="inner-wrap">
+      <i :class="[icon]" class="icon iconfont"></i>
+      <p v-if="text" class="text">{{text}}</p>
+    </div>
   </div>
 </template>
 
 <script>
   export default {
-    name: '',
+    name: 'Loading',
     props: {
-      display: {
+      value: {
         type: Boolean,
         default: false
       },
@@ -19,34 +21,49 @@
       },
       text: {
         type: String,
-        default: '加载中...'
-      },
-      theme: {
-        default: 'kkk'
+        default: '加载中'
       }
     },
-    data() {
-      return {};
+    computed: {
+      show: {
+        get() {
+          return this.value;
+        },
+        set(newValue) {
+          this.$emit('input', newValue);
+        }
+      }
     }
   };
 </script>
 
 <style lang="scss" scoped>
-  .loading-item{
-    position: absolute;
+  .loading-item {
+    z-index: 100;
+    position: fixed;
     left: 50%; top: 50%;
-    padding: 5px 10px;
-	  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.2);
-	  border-radius: 2px;
-    border: solid 1px #dedede;
-    font-size: 12px;
-    background-color: #fff;
+    width: 95px; height: 95px;
     transform: translate(-50%, -50%);
+	  border-radius: 4px;
+    background: rgba(0, 0, 0, 0.6);
 
-    i{
+    .inner-wrap {
+      position: absolute;
+      left: 50%; top: 50%;
+      text-align: center;
+      color: #fff;
+      transform: translate(-50%, -50%);
+    }
+    .icon {
+      font-size: 26px;
       animation: rotate 1s linear 0s infinite normal;
     }
+    .text {
+      margin-top: 8px;
+      font-size: 12px;
+    }
   }
+
   @keyframes rotate{
     0% {
       transform: rotate(0deg);
