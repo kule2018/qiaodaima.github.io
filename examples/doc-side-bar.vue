@@ -5,11 +5,9 @@
     :param="param"
     @on-test="onTest">
     <div slot="tip">
-      侧边栏顶部可以使用分发槽 slot="header" 来自定义内容, 此时建议 title字段都传递空值来避免干扰界面布局<br>
-      主体自定义内容使用分发槽 slot="content" 来控制，当主体部分超过一定高度时会出现滚动条 <br>
       buttons 字段中的 text 字段是必须的，其余字段都是可选的，建议给按钮传递一个flag字段，
       用于标识点击了哪个按钮，而不是用 text 字段来标识(这么做显得很low~) <br>
-      buttons 字段的默认值为 确认 和 取消 两个按钮，文档中的默认值仅仅是数据格式（表格太小，展示字段有限）<br>
+      buttons 字段的默认值为 【确认】 和 【取消】 两个按钮，文档中的默认值仅仅是数据格式（表格太小，展示字段有限）<br>
       on-buttons 回调事件返回的当前按钮对象格式取决于 buttons 字段中的定义，
     </div>
 
@@ -73,6 +71,20 @@
             isMust: false
           },
           {
+            name: 'slot="header"',
+            explain: '自定义顶部，建议 title 字段都传递空值来避免干扰界面布局',
+            type: '-',
+            default: '-',
+            isMust: '-'
+          },
+          {
+            name: 'slot="content"',
+            explain: '主体自定义内容，超过一定高度时会出现滚动条，默认不含任何 padding margin',
+            type: '-',
+            default: '-',
+            isMust: '-'
+          },
+          {
             name: 'on-buttons',
             explain: '底部按钮点击回调事件，附带当前按钮对象',
             type: '-',
@@ -130,9 +142,5 @@
 </script>
 
 <style lang="scss" scoped>
-  .doc-example .tool-wrap {
-    & + .side-bar-item {
-      margin-top: 0;
-    }
-  }
+  //
 </style>

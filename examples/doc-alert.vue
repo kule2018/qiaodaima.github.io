@@ -5,8 +5,7 @@
     :param="param"
     @on-test="onTest">
     <div slot="tip">
-      如果默认排版不满足您的需求，您也可以使用分发槽 slot="content" 来自定义内容，
-      此时建议title subTitle都传递为空，避免干扰您的排版,
+      提示内容支持定义排版
     </div>
 
     <template slot="example">
@@ -76,6 +75,13 @@
             type: 'String',
             default: '\'\'',
             isMust: false
+          },
+          {
+            name: 'slot="content"',
+            explain: '自行定义提示内容，此时建议title subTitle都传递为空，避免干扰您的排版',
+            type: '-',
+            default: '-',
+            isMust: '-'
           },
           {
             name: 'on-close',
@@ -167,13 +173,6 @@
   .alert-item {
     a {
       text-decoration: underline;
-    }
-  }
-  .doc-example {
-    .tool-wrap {
-      & + * {
-        margin-top: 0;
-      }
     }
   }
 </style>

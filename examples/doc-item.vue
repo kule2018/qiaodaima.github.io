@@ -24,7 +24,7 @@
     </dl>
 
     <table class="api-table">
-      <caption>props & event</caption>
+      <caption>-props & slot & event-</caption>
       <thead>
         <tr>
           <th>属性</th>
@@ -86,15 +86,17 @@
 
 <style lang="scss" scoped>
   .btn {
-    padding: 2px 12px;
+    padding: 5px 12px;
     border: 1px solid #0079ff;
     border-radius: 4px;
     font-size: 12px;
     color: #fff;
     background: #0079ff;
+    transition: all 0.3s;
 
     &:hover {
-      opacity: 0.8;
+      border-color: #40a9ff;
+      background: #40a9ff;
     }
   }
   .tip {
@@ -115,11 +117,6 @@
     & > dt {
       margin-bottom: 5px;
       font-size: 12px;
-    }
-    .tool-wrap {
-      & + * {
-        margin-top: 15px;;
-      }
     }
   }
   .api-table {
@@ -149,6 +146,15 @@
     thead {
       background: #f7f7f7;
       color: #5c6b77;
+    }
+    tbody {
+      tr {
+        transition: all 0.3s;
+
+        &:hover {
+          background: #eee;
+        }
+      }
     }
   }
   .doc-item {

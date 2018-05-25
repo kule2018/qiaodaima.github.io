@@ -5,11 +5,9 @@
     :param="param"
     @on-test="onTest">
     <div slot="tip">
-      对话框的主体部分默认不含任何 padding margin<br>
-      主体自定义内容 使用分发槽 slot="content" 来控制，当主体部分超过一定高度时会出现滚动条 <br>
       buttons 字段中的 text 字段是必须的，其余字段都是可选的，建议给按钮传递一个flag字段，
       用于标识点击了哪个按钮，而不是用 text 字段来标识(这么做显得很low~) <br>
-      buttons 字段的默认值为 确认 和 取消 两个按钮，文档中的默认值仅仅是数据格式（表格太小，展示字段有限）<br>
+      buttons 字段的默认值为 【确认】 和 【取消】 两个按钮，文档中的默认值仅仅是数据格式（表格太小，展示字段有限）<br>
       on-buttons 回调事件返回的当前按钮对象格式取决于 buttons 字段中的定义，
     </div>
 
@@ -77,6 +75,13 @@
               }
             ],
             isMust: false
+          },
+          {
+            name: 'slot="content"',
+            explain: '主体自定义内容,超过一定高度时会出现滚动条，默认不含任何 padding margin',
+            type: '-',
+            default: '-',
+            isMust: '-'
           },
           {
             name: 'on-close',

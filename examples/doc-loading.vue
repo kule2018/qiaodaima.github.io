@@ -82,11 +82,5 @@
 </script>
 
 <style lang="scss" scoped>
-  .doc-example {
-    .tool-wrap {
-      & + * {
-        margin-top: 0;
-      }
-    }
-  }
+  //
 </style>
