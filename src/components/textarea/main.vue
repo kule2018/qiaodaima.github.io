@@ -5,7 +5,10 @@
       :rows="rows"
       :maxlength="maxlength"
       :placeholder="placeholder"
-      :disabled="disabled">
+      :disabled="disabled"
+      @focus="onFocus"
+      @blur="onBlur"
+      @change="onChange">
     </textarea>
     <i v-show="value" @click="clearvalue" class="btn-clear iconfont icon-error"></i>
     <div :class="{'error': valueCopy.length === maxlength}" class="num-words-tips">
@@ -52,6 +55,18 @@
     methods: {
       clearvalue() {
         this.$emit('input', '');
+      },
+      onFocus(event) {
+        console.log('on-focus', event);
+        this.$emit('on-focus', event);
+      },
+      onBlur(event) {
+        console.log('on-blur', event);
+        this.$emit('on-blur', event);
+      },
+      onChange(event) {
+        console.log('on-change', event);
+        this.$emit('on-change', event);
       }
     }
   };

@@ -2,7 +2,8 @@
   <DocItem :title="'Textarea 多行文本'" :param="param">
     <div slot="tip">
       默认表现为块级元素样式，即占据一整行。根据以往经验来看，左右拉伸一般会对现有布局造成破坏，
-      因此组件默认禁止了该功能，但可以上下拉伸
+      因此组件默认禁止了该功能，但可以上下拉伸 <br>
+      请打开控制台查看相应回调函数信息
     </div>
 
     <template slot="example">
@@ -59,6 +60,27 @@
             type: 'Number',
             default: 5,
             isMust: false
+          },
+          {
+            name: 'on-focus',
+            explain: '获得焦点的时候触发的回调函数，返回原生event事件对象',
+            type: '-',
+            default: '-',
+            isMust: '-'
+          },
+          {
+            name: 'on-blur',
+            explain: '失去焦点的时候触发的回调函数，返回原生event事件对象',
+            type: '-',
+            default: '-',
+            isMust: '-'
+          },
+          {
+            name: 'on-change',
+            explain: '当文本框的值发生改变，并且失去焦点的时候触发的回调函数，返回原生event事件对象',
+            type: '-',
+            default: '-',
+            isMust: '-'
           }
         ],
         value: `传说秦末年间，虞姬眼睛受伤了看不见，一次项羽出征，虞姬为他敲鼓送行，项羽甚是感动，于是给这种敲发命名为瞎姬霸敲`

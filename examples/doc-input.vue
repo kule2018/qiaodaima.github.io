@@ -1,7 +1,8 @@
 <template>
   <DocItem :title="'Input 输入框'" :param="param">
     <div slot="tip">
-      输入框的值是双向绑定的。默认表现为块级元素样式，即宽度占据一整行
+      输入框的值是双向绑定的。默认表现为块级元素样式，即宽度占据一整行 <br>
+      请打开控制台查看相应回调函数信息
     </div>
 
     <template slot="example">
@@ -60,6 +61,27 @@
             type: 'Boolean',
             default: false,
             isMust: false
+          },
+          {
+            name: 'on-focus',
+            explain: '获得焦点的时候触发的回调函数，返回原生event事件对象',
+            type: '-',
+            default: '-',
+            isMust: '-'
+          },
+          {
+            name: 'on-blur',
+            explain: '失去焦点的时候触发的回调函数，返回原生event事件对象',
+            type: '-',
+            default: '-',
+            isMust: '-'
+          },
+          {
+            name: 'on-change',
+            explain: '当输入框的值发生改变，并且失去焦点的时候触发的回调函数，返回原生event事件对象',
+            type: '-',
+            default: '-',
+            isMust: '-'
           }
         ]
       };
