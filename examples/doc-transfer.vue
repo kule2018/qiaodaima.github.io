@@ -3,14 +3,19 @@
     :title="'Transfer 穿梭框'"
     :param="param">
     <div slot="tip">
-      默认表现为块级元素样式，高度已经固定
+      默认表现为块级元素样式，高度已经固定，文档中的默认值仅仅是数据格式（表格太小，展示字段有限）<br>
+      【on-change】回调函数返回三个参数信息，【direction：转移方向】，【select: 已选择的id集合】，<br>
+      【data: 当前栏的可选数据(abled)、不可选数据(disabled)、以及所有数据(all)】
     </div>
 
     <template slot="example">
       <dl class="group">
         <dt>当前值：{{modelData.select}}</dt>
         <dd>
-          <Transfer v-model="modelData.select" v-bind="modelData"></Transfer>
+          <Transfer
+            v-model="modelData.select"
+            v-bind="modelData"
+            @on-change="onChange"></Transfer>
         </dd>
       </dl>
     </template>
@@ -32,17 +37,37 @@
         param: [
           {
             name: 'v-model',
-            explain: '选择的数据，对应data数组成员里面的id字段，组件内部对此数据进行了去重操作',
+            explain: '已选择的数据，对应data数组成员里面的id字段',
             type: 'Array',
-            default: '-',
+            default: `['', '', ''] 成员也可以是数字，这取决于id字段的数据类型`,
             isMust: true
           },
           {
             name: 'data',
-            explain: '总的数据，【id: 这个选项的值，必须唯一】【text： 选项文案】【disabled： 是否禁用】',
+            explain: '总的数据源',
             type: 'Array',
-            default: '-',
+            default: [
+              {
+                id: '这个选项的值，必须唯一',
+                text: '选项文案',
+                disabled: false
+              }
+            ],
             isMust: true
+          },
+          {
+            name: 'titles',
+            explain: '两侧的标题',
+            type: 'Array',
+            default: ['源列表', '目的列表'],
+            isMust: false
+          },
+          {
+            name: 'on-change',
+            explain: '选项在两栏之间转移时的回调函数，请查看控制台',
+            type: '-',
+            default: '-',
+            isMust: '-'
           }
         ],
         modelData: {
@@ -94,6 +119,9 @@
             this.modelData.select.push(i);
           }
         }
+      },
+      onChange(result) {
+        console.log(result);
       }
     }
   };

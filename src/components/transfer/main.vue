@@ -5,8 +5,9 @@
         <Checkbox
           v-model="unselectDtatCheckedAll"
           :label="true"
+          :text="titles[0]"
           :disabled="unselectDtat.abled.length === 0"
-          @on-change="checkedAll(!!unselectDtatCheckedAll[0], 'moveToSelectData', 'unselectDtat');">
+          @on-change="checkedAll(!!unselectDtatCheckedAll[0], 'unselectDtat', 'moveToSelectData');">
         </Checkbox>
         <em class="number">{{moveToSelectData.length}}/{{unselectDtat.all.length}}</em>
       </div>
@@ -42,8 +43,9 @@
         <Checkbox
           v-model="selectDataCheckedAll"
           :label="true"
+          :text="titles[1]"
           :disabled="selectData.abled.length === 0"
-          @on-change="checkedAll(!!selectDataCheckedAll[0], 'moveToUnselectData', 'selectData');">
+          @on-change="checkedAll(!!selectDataCheckedAll[0], 'selectData', 'moveToUnselectData',);">
         </Checkbox>
         <em class="number">{{moveToUnselectData.length}}/{{selectData.all.length}}</em>
       </div>
@@ -81,7 +83,7 @@
       titles: {
         type: Array,
         default() {
-          return ['fdd', 'fdsfds'];
+          return ['源列表', '目的列表'];
         }
       }
     },
@@ -172,14 +174,8 @@
     },
     methods: {
       // 全选 反选
-      checkedAll(isCheckedAll, select, bbb) {
-        if(isCheckedAll) {
-          this[select] = this[bbb].abled.map(function(item) {
-            return item.id;
-          });
-        } else {
-          this[select] = [];
-        }
+      checkedAll(isCheckedAll, data, select) {
+        this[select] = isCheckedAll ? this[data].abled.map(item => item.id) : [];
       },
 
       // 把左侧数据 移动 到右侧
@@ -189,6 +185,12 @@
         if(!this.moveToSelectData.length) {
           return;
         }
+
+        this.$emit('on-change', {
+          direction: 'right',
+          data: this.unselectDtat,
+          select: this.moveToSelectData
+        });
 
         select.push(...this.moveToSelectData);
         this.moveToSelectData = [];
@@ -203,6 +205,12 @@
         if(!this.moveToUnselectData.length) {
           return;
         }
+
+        this.$emit('on-change', {
+          direction: 'left',
+          data: this.selectData,
+          select: this.moveToUnselectData
+        });
 
         for(let i = 0; i < this.moveToUnselectData.length; i++) {
           select.splice(select.indexOf(this.moveToUnselectData[i]), 1);
@@ -284,9 +292,6 @@
         padding: 6px 10px;
         transition: all 0.3s;
 
-        span {
-          font-size: 12px !important;
-        }
         &:hover {
           background: #ecf8ff;
         }
@@ -299,11 +304,7 @@
   .transfer-item {
     .checkbox-item {
       i {
-        margin-right: 15px;
-        border-color: #dddee1;
-      }
-      span {
-        font-size: 12px;
+        margin-right: 10px !important;
       }
     }
   }
