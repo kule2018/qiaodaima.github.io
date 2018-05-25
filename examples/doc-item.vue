@@ -24,7 +24,7 @@
     </dl>
 
     <table class="api-table">
-      <caption>-props & slot & event-</caption>
+      <caption>props & slot & event</caption>
       <thead>
         <tr>
           <th>属性</th>

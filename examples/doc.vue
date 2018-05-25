@@ -8,9 +8,9 @@
     <DocTransfer></DocTransfer>
     <DocLoading></DocLoading>
     <DocInput></DocInput>
+    <DocTextarea></DocTextarea>
     <DocRadio></DocRadio>
     <DocCheckbox></DocCheckbox>
-    <DocTextarea></DocTextarea>
   </div>
 </template>
 
@@ -21,10 +21,9 @@
   import DocTransfer from './doc-transfer.vue';
   import DocLoading from './doc-loading.vue';
   import DocInput from './doc-input.vue';
+  import DocTextarea from './doc-textarea.vue';
   import DocRadio from './doc-radio.vue';
   import DocCheckbox from './doc-checkbox.vue';
-  import DocTextarea from './doc-textarea.vue';
-
 
   export default {
     name: 'Doc',
@@ -35,9 +34,9 @@
       DocTransfer,
       DocLoading,
       DocInput,
+      DocTextarea,
       DocRadio,
-      DocCheckbox,
-      DocTextarea
+      DocCheckbox
     }
   };
 </script>
@@ -50,8 +49,7 @@
   }
   .doc-content {
     margin: 0 auto;
-    padding: 20px;
-    width: 1200px;
+    padding: 20px 260px;
 
     .doc-item {
       margin-bottom: 20px;;
