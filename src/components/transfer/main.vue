@@ -2,12 +2,12 @@
   <div class="transfer-item">
     <div class="content-wrap">
       <div class="title-wrap">
-        <Checkbox :label="true"></Checkbox>
-        <em class="number">{{moveToSelectData.length}}/{{unselectDtat.length}}</em>
+        <Checkbox v-model="allA" :label="true" :disabled="unselectDtat.abled.length === 0"></Checkbox>
+        <em class="number">{{moveToSelectData.length}}/{{unselectDtat.all.length}}</em>
       </div>
       <div class="list-wrap">
         <Checkbox
-          v-for="(select) in unselectDtat"
+          v-for="(select) in unselectDtat.all"
           :key="select.id"
           v-model="moveToSelectData"
           :label="select.id"
@@ -34,12 +34,12 @@
 
     <div class="content-wrap">
       <div class="title-wrap">
-        <Checkbox :label="true"></Checkbox>
-        <em class="number">{{moveToUnselectData.length}}/{{selectData.length}}</em>
+        <Checkbox v-model="allB" :label="true" :disabled="selectData.abled.length === 0"></Checkbox>
+        <em class="number">{{moveToUnselectData.length}}/{{selectData.all.length}}</em>
       </div>
       <div class="list-wrap">
         <Checkbox
-          v-for="(select) in selectData"
+          v-for="(select) in selectData.all"
           :key="select.id"
           v-model="moveToUnselectData"
           :label="select.id"
@@ -72,60 +72,92 @@
     computed: {
       // 左侧数据
       unselectDtat() {
-        let result = [];
+        let select = Array.from(new Set(this.value));
+        let result = {
+          all: [], // 全部的数据
+          abled: [], // 可点击的
+          disabled: [] // 不可点击的
+        };
 
         for(let i = 0; i < this.data.length; i++) {
-          let isNoFind = true;
+          let isIn = true; // 标记是否已经存在 已选择数据里面
 
-          for(let j = 0; j < this.value.length; j++) {
-            if(this.data[i].id === this.value[j]) {
-              isNoFind = false;
+          for(let j = 0; j < select.length; j++) {
+            if(this.data[i].id === select[j]) {
+              isIn = false; // 已经存在 已选择数据里面
               break;
             }
           }
-          if(isNoFind) {
-            result.push(this.data[i]);
+
+          if(isIn) {
+            result.all.push(this.data[i]);
+            switch(this.data[i].disabled) {
+              case true:
+                result.disabled.push(this.data[i]);
+                break;
+              case false:
+                result.abled.push(this.data[i]);
+                break;
+              default:
+                break;
+            }
           }
         }
+
         return result;
       },
 
       // 右侧数据
       selectData() {
-        let result = [];
-        let temp = Array.from(new Set(this.value));
+        let select = Array.from(new Set(this.value));
+        let result = {
+          all: [], // 全部的数据
+          abled: [], // 可点击的
+          disabled: [] // 不可点击的
+        };
 
         for(let i = 0; i < this.data.length; i++) {
-          for(let j = 0; j < temp.length; j++) {
-            if(this.data[i].id === temp[j]) {
-              result.push(this.data[i]);
+          for(let j = 0; j < select.length; j++) {
+            if(this.data[i].id === select[j]) {
+              result.all.push(this.data[i]);
+              switch(this.data[i].disabled) {
+                case true:
+                  result.disabled.push(this.data[i]);
+                  break;
+                case false:
+                  result.abled.push(this.data[i]);
+                  break;
+                default:
+                  break;
+              }
               break;
             }
           }
         }
+
         return result;
       }
     },
     data() {
       return {
-        unselectDtatCheckAll: [],
+        allA: [],
+        allB: [],
         moveToSelectData: [], // 左侧已选的数据
-
-        selectDataCheckAll: [],
         moveToUnselectData: [] // 右侧已选的数据
       };
     },
     watch: {
       moveToSelectData(newValue) {
-        if(newValue.length === this.unselectDtat.length) {
-          console.log(888);
-        }
+        this.allA = newValue.length === this.unselectDtat.abled.length ? newValue.length === 0 ? [] : [true] : [];
+      },
+      moveToUnselectData(newValue) {
+        this.allB = newValue.length === this.selectData.abled.length ? newValue.length === 0 ? [] : [true] : [];
       }
     },
     methods: {
       // 把左侧数据 移动 到右侧
       moveToSelect() {
-        let select = JSON.parse(JSON.stringify(this.value));
+        let select = JSON.parse(JSON.stringify(Array.from(new Set(this.value))));
 
         if(!this.moveToSelectData.length) {
           return;
@@ -133,12 +165,13 @@
 
         select.push(...this.moveToSelectData);
         this.moveToSelectData = [];
+        this.allB = []; // 右侧全选 不打勾
         this.$emit('input', select);
       },
 
       // 把右侧数据 移动 到左侧
       moveToUnselect() {
-        let select = JSON.parse(JSON.stringify(this.value));
+        let select = JSON.parse(JSON.stringify(Array.from(new Set(this.value))));
 
         if(!this.moveToUnselectData.length) {
           return;
@@ -149,6 +182,7 @@
         }
 
         this.moveToUnselectData = [];
+        this.allA = []; // 左侧全选 不打勾
         this.$emit('input', select);
       }
     }
