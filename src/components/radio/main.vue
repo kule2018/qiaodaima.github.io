@@ -5,6 +5,7 @@
       :value="label"
       :name="name"
       :disabled="disabled"
+      @change="onChange"
       type="radio">
     <i class="icon"></i>
     <span>{{text}}</span>
@@ -44,6 +45,11 @@
         set(newValue) {
           this.$emit('input', newValue);
         }
+      }
+    },
+    methods: {
+      onChange(event) {
+        this.$emit('on-change', event);
       }
     }
   };

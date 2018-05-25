@@ -85,6 +85,13 @@
             type: 'String',
             default: '单选按钮文案',
             isMust: false
+          },
+          {
+            name: 'on-change',
+            explain: '在选项状态发生改变时触发，返回原生事件对象',
+            type: '-',
+            default: '-',
+            isMust: '-'
           }
         ]
       };

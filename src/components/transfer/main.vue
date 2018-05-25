@@ -2,7 +2,12 @@
   <div class="transfer-item">
     <div class="content-wrap">
       <div class="title-wrap">
-        <Checkbox v-model="allA" :label="true" :disabled="unselectDtat.abled.length === 0"></Checkbox>
+        <Checkbox
+          v-model="unselectDtatCheckedAll"
+          :label="true"
+          :disabled="unselectDtat.abled.length === 0"
+          @on-change="checkedAll(!!unselectDtatCheckedAll[0], 'moveToSelectData', 'unselectDtat');">
+        </Checkbox>
         <em class="number">{{moveToSelectData.length}}/{{unselectDtat.all.length}}</em>
       </div>
       <div class="list-wrap">
@@ -34,7 +39,12 @@
 
     <div class="content-wrap">
       <div class="title-wrap">
-        <Checkbox v-model="allB" :label="true" :disabled="selectData.abled.length === 0"></Checkbox>
+        <Checkbox
+          v-model="selectDataCheckedAll"
+          :label="true"
+          :disabled="selectData.abled.length === 0"
+          @on-change="checkedAll(!!selectDataCheckedAll[0], 'moveToUnselectData', 'selectData');">
+        </Checkbox>
         <em class="number">{{moveToUnselectData.length}}/{{selectData.all.length}}</em>
       </div>
       <div class="list-wrap">
@@ -67,6 +77,12 @@
       data: {
         type: Array,
         required: true
+      },
+      titles: {
+        type: Array,
+        default() {
+          return ['fdd', 'fdsfds'];
+        }
       }
     },
     computed: {
@@ -140,21 +156,32 @@
     },
     data() {
       return {
-        allA: [],
-        allB: [],
+        unselectDtatCheckedAll: [], // 左侧全选标记
         moveToSelectData: [], // 左侧已选的数据
+        selectDataCheckedAll: [], // 右侧全选标记
         moveToUnselectData: [] // 右侧已选的数据
       };
     },
     watch: {
       moveToSelectData(newValue) {
-        this.allA = newValue.length === this.unselectDtat.abled.length ? newValue.length === 0 ? [] : [true] : [];
+        this.unselectDtatCheckedAll = newValue.length === this.unselectDtat.abled.length ? newValue.length === 0 ? [] : [true] : [];
       },
       moveToUnselectData(newValue) {
-        this.allB = newValue.length === this.selectData.abled.length ? newValue.length === 0 ? [] : [true] : [];
+        this.selectDataCheckedAll = newValue.length === this.selectData.abled.length ? newValue.length === 0 ? [] : [true] : [];
       }
     },
     methods: {
+      // 全选 反选
+      checkedAll(isCheckedAll, select, bbb) {
+        if(isCheckedAll) {
+          this[select] = this[bbb].abled.map(function(item) {
+            return item.id;
+          });
+        } else {
+          this[select] = [];
+        }
+      },
+
       // 把左侧数据 移动 到右侧
       moveToSelect() {
         let select = JSON.parse(JSON.stringify(Array.from(new Set(this.value))));
@@ -165,7 +192,7 @@
 
         select.push(...this.moveToSelectData);
         this.moveToSelectData = [];
-        this.allB = []; // 右侧全选 不打勾
+        this.selectDataCheckedAll = []; // 右侧全选 不打勾
         this.$emit('input', select);
       },
 
@@ -182,7 +209,7 @@
         }
 
         this.moveToUnselectData = [];
-        this.allA = []; // 左侧全选 不打勾
+        this.unselectDtatCheckedAll = []; // 左侧全选 不打勾
         this.$emit('input', select);
       }
     }
