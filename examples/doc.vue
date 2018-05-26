@@ -2,6 +2,7 @@
   <div class="doc-content">
     <h1>基础组件文档说明</h1>
 
+    <DocProgressCircle></DocProgressCircle>
     <DocDialog></DocDialog>
     <DocSideBar></DocSideBar>
     <DocAlert></DocAlert>
@@ -15,6 +16,7 @@
 </template>
 
 <script>
+  import DocProgressCircle from './doc-progress-circle.vue';
   import DocDialog from './doc-dialog.vue';
   import DocSideBar from './doc-side-bar.vue';
   import DocAlert from './doc-alert.vue';
@@ -28,6 +30,7 @@
   export default {
     name: 'Doc',
     components: {
+      DocProgressCircle,
       DocDialog,
       DocSideBar,
       DocAlert,
