@@ -27,28 +27,28 @@
         param: [
           {
             name: 'size',
-            explain: '图表的宽度和高度，单位 px',
+            explain: '图表的宽度和高度，即圆圈的半径，单位px',
             type: 'Number',
             default: 120,
             isMust: false
           },
           {
             name: 'percent',
-            explain: '百分比',
+            explain: '即高亮环的长度，%模式',
             type: 'Number',
             default: 0,
             isMust: false
           },
           {
             name: 'width',
-            explain: '线宽，单位 px',
+            explain: '环的宽度，单位px',
             type: 'Number',
             default: 5,
             isMust: false
           },
           {
             name: 'trail-color',
-            explain: '进度环背景的颜色',
+            explain: '进度环背景的颜色，即暗色环的背景颜色',
             type: 'String',
             default: '#eaeef2',
             isMust: false
