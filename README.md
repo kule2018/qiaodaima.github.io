@@ -1,5 +1,3 @@
-![1.gif-6604.1kB][1]
-
 ## 说明
 
  - 基于 `vue` 封装的一些常用组件，比如 `对话框`、`穿梭框` 、`表单布局`
@@ -15,6 +13,3 @@ npm install
 # 运行项目（开发环境）
 npm run dev （浏览器地址更改为 http://localhost:8080）
 ```
-
-
-  [1]: http://static.zybuluo.com/qiaodaima/c3k05au46dfldd6l2g0el3sj/1.gif
