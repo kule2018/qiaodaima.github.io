@@ -93,14 +93,11 @@
 
           timer = setInterval(function() {
             draw(count);
-
-            if(++count > _this.percent) {
-              clearInterval(timer);
-            }
+            count >= _this.percent ? clearInterval(timer) : count++;
           }, _this.speed);
         };
 
-        // 线条末端圆头、绘制文字的样式
+        // 线条末端圆头、文字样式设定
         conText.font = _this.text.font;
         conText.textAlign = 'center';
         conText.textBaseline = 'middle';

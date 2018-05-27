@@ -20,15 +20,13 @@
 
       <progress-circle
         :size="140"
-        :percent="percent"
+        :percent="75"
         :trail-color="'transparent'"
         :stroke-color="'#ff5500'"
         :text="{show: false}"
-        :speed="0"
-        @click.native="percentIncrease">
+        :speed="0">
         <p slot="content">
-          <span v-if="percent !== 100" style="font-size: 18px;">值：{{percent}}%</span>
-          <span v-else style="font-size: 20px; color: #5cb85c">ok</span>
+          <span style="font-size: 18px;">值：85%</span>
         </p>
       </progress-circle>
 
@@ -40,7 +38,7 @@
         :text="{show: false}"
         @click.native="percentIncrease">
         <p slot="content">
-          <span v-if="percent !== 100" style="font-size: 18px;">值：{{percentTemp}}%</span>
+          <span v-if="percentTemp !== 100" style="font-size: 18px;">值：{{percentTemp}}%</span>
           <span v-else style="font-size: 20px; color: #5cb85c">ok</span>
         </p>
       </progress-circle>
@@ -145,16 +143,23 @@
       };
     },
     mounted() {
-      let _this = this;
-      let timer = setInterval(function() {
-        if(++_this.percentTemp >= _this.percent) {
-          clearInterval(timer);
-        }
-      }, 15);
+      this.percentTempFn();
     },
     methods: {
       percentIncrease() {
+        let _this = this;
+
         this.percent = (this.percent + 10) > 100 ? 0 : (this.percent + 10);
+        this.percentTempFn();
+      },
+      percentTempFn() {
+        let _this = this;
+        let timer = null;
+
+        _this.percentTemp = 0;
+        timer = setInterval(function() {
+          _this.percentTemp >= _this.percent ? clearInterval(timer) : _this.percentTemp++;
+        }, 15);
       }
     }
   };
