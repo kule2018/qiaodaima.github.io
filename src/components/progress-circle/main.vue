@@ -1,10 +1,9 @@
 <template>
   <div class="progress-circle-item">
-    <canvas
-      id="process"
-      :width="size"
-      :height="size">
-    </canvas>
+    <canvas :width="size" :height="size">您的浏览器不支持canvas ！</canvas>
+    <div class="content">
+      <slot v-if="!text.show" name="content"></slot>
+    </div>
   </div>
 </template>
 
@@ -22,7 +21,7 @@
       },
       width: {
         type: Number,
-        default: 5
+        default: 6
       },
       trailColor: {
         type: String,
@@ -31,44 +30,86 @@
       strokeColor: {
         type: String,
         default: '#2db7f5'
+      },
+      fullColor: {
+        type: String,
+        default: '#5cb85c'
+      },
+      text: {
+        type: Object,
+        default() {
+          return {
+            show: true,
+            font: 'normal 18px Microsoft YaHei'
+          };
+        }
+      },
+      speed: {
+        type: Number,
+        default: 15
       }
     },
     mounted() {
       this.creat();
     },
+    watch: {
+      percent() {
+        this.creat();
+      }
+    },
     methods: {
       creat() {
-        let $canvas = document.getElementById('process');
-        let ctx = $canvas.getContext('2d');
+        let conText = this.$el.getElementsByTagName('canvas')[0].getContext('2d');
+        let _this = this;
+        let x = _this.size / 2;
+        let y = x;
+        let r = (_this.size - 2 * _this.width) / 2;
+        let draw = function(percent) {
 
-        // 底环
-        ctx.beginPath();
-        ctx.arc(this.size / 2, this.size / 2, this.size / 2, 0, Math.PI * 2);
-        ctx.closePath();
-        ctx.fillStyle = this.trailColor;
-        ctx.fill();
+          // 清除画布 避免多次重复绘制产生锯齿
+          conText.clearRect(0, 0, _this.size, _this.size);
 
-        // 高亮环
-        ctx.beginPath();
-        ctx.moveTo(this.size / 2, this.size / 2);
-        ctx.arc(this.size / 2, this.size / 2, this.size / 2, Math.PI * 1, Math.PI * (1.5 + 2 * 50 / 100));
-        ctx.fillStyle = this.strokeColor;
-        ctx.fill();
+          // 底环，即暗色环
+          conText.beginPath();
+          conText.strokeStyle = _this.trailColor;
+          conText.arc(x, y, r, 0, Math.PI * 2);
+          conText.stroke();
 
-        // 内填充圆
-        ctx.beginPath();
-        ctx.arc(this.size / 2, this.size / 2, this.size / 2 - 5, 0, Math.PI * 2);
-        ctx.closePath();
-        ctx.fillStyle = '#fff';
-        ctx.fill();
+          // 高亮环
+          conText.beginPath();
+          conText.strokeStyle = percent === 100 ? _this.fullColor : _this.strokeColor;
+          conText.arc(x, y, r, Math.PI * 1.5, Math.PI * (1.5 + 2 * percent / 100));
+          conText.stroke();
 
-        // 填充文字
-        ctx.font = 'bold 10pt Microsoft YaHei';
-        ctx.fillStyle = '#333';
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.moveTo(this.size / 2, this.size / 2);
-        ctx.fillText('75%', this.size / 2, this.size / 2);
+          // 绘制文字
+          if(_this.text.show) {
+            conText.beginPath();
+            conText.fillText(`${percent}%`, x, y);
+          }
+        };
+        let playDraw = function() {
+          let count = 0;
+          let timer = null;
+
+          timer = setInterval(function() {
+            draw(count);
+
+            if(++count > _this.percent) {
+              clearInterval(timer);
+            }
+          }, _this.speed);
+        };
+
+        // 线条末端圆头、绘制文字的样式
+        conText.font = _this.text.font;
+        conText.textAlign = 'center';
+        conText.textBaseline = 'middle';
+        conText.lineCap = _this.percent === 0 ? 'butt' : 'round';
+        conText.lineWidth = _this.width;
+        conText.fillStyle = _this.percent === 100 ? _this.fullColor : '#333';
+
+        // 开始绘制图案
+        _this.speed ? playDraw(): draw(_this.percent);
       }
     }
   };
@@ -78,10 +119,20 @@
   .progress-circle-item {
     position: relative;
     display: inline-block;
+    vertical-align: middle;
     font-size: 0;
 
     .canvas {
       display: block;
+    }
+    .content {
+      position: absolute;
+      left: 50%; top: 50%;
+      font-size: 14px;
+      white-space:nowrap;
+      user-select: none;
+      text-align: center;
+      transform: translate(-50%, -50%);
     }
   }
 </style>
