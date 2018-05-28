@@ -45,7 +45,7 @@
           :label="true"
           :text="titles[1]"
           :disabled="selectData.abled.length === 0"
-          @on-change="checkedAll(!!selectDataCheckedAll[0], 'selectData', 'moveToUnselectData',);">
+          @on-change="checkedAll(!!selectDataCheckedAll[0], 'selectData', 'moveToUnselectData');">
         </Checkbox>
         <em class="number">{{moveToUnselectData.length}}/{{selectData.all.length}}</em>
       </div>
