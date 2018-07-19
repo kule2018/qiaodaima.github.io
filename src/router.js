@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Doc from '../../examples/doc.vue';
-import TestAxios from '../../test/test-axios.vue';
+import Doc from '../examples/doc.vue';
+import TestAxios from '../test/test-axios.vue';
 
 Vue.use(Router);
 

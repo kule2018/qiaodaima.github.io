@@ -1,15 +1,21 @@
-## 说明
+# base-ui
 
- - 基于 `vue` 封装的一些常用组件，比如 `对话框`、`穿梭框` 、`表单布局`
- - 目录结构是采用 `vue-cli` 生成的，然后做了一些小调整，比如 `eslint校验规则` 、`sever的端口监听`
- - `src/components` 目录下是基础组件源码 `examples` 目录下是相关组件的文档说明
-
-## 构建步骤
-
-``` bash
-# 安装依赖关系
+## Project setup
+```
 npm install
+```
 
-# 运行项目（开发环境）
-npm run dev （浏览器地址更改为 http://localhost:8080）
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
+
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Lints and fixes files
+```
+npm run lint
 ```

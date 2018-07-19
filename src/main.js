@@ -1,6 +1,7 @@
-import Vue from 'vue';
-import App from './App';
-import router from './router';
+import Vue from "vue";
+import router from "./router";
+import store from "./store/index";
+import App from "./App.vue";
 import 'animate.css';
 import './assets/iconfont/iconfont.css';
 import './assets/sass/main.scss';
@@ -8,10 +9,7 @@ import './assets/sass/main.scss';
 Vue.config.productionTip = false;
 
 new Vue({
-  el: '#app',
   router,
-  components: {
-    App
-  },
-  template: '<App/>'
-});
+  store,
+  render: h => h(App)
+}).$mount("#app");

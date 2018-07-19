@@ -1,17 +1,11 @@
 module.exports = {
   root: true,
-  parserOptions: {
-    parser: 'babel-eslint'
-  },
   env: {
-    browser: true,
+    node: true
   },
   extends: [
-    'plugin:vue/essential'
-    // 'standard'
-  ],
-  plugins: [
-    'vue'
+    'plugin:vue/essential',
+    '@vue/prettier'
   ],
   rules: {
     'semi': [1, 'always'],                          // 语句强制分号结尾
@@ -125,5 +119,8 @@ module.exports = {
       }
     ],                                               // 空行最多不能超过2行
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
+  },
+  parserOptions: {
+    parser: 'babel-eslint'
   }
 }
