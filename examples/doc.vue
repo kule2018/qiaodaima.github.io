@@ -12,6 +12,7 @@
     <DocTextarea></DocTextarea>
     <DocRadio></DocRadio>
     <DocCheckbox></DocCheckbox>
+    <DocSwitch></DocSwitch>
   </div>
 </template>
 
@@ -26,6 +27,7 @@
   import DocTextarea from './doc-textarea.vue';
   import DocRadio from './doc-radio.vue';
   import DocCheckbox from './doc-checkbox.vue';
+  import DocSwitch from './doc-switch.vue';
 
   export default {
     name: 'Doc',
@@ -39,7 +41,8 @@
       DocInput,
       DocTextarea,
       DocRadio,
-      DocCheckbox
+      DocCheckbox,
+      DocSwitch
     }
   };
 </script>
