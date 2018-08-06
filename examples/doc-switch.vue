@@ -1,8 +1,7 @@
 <template>
   <DocItem
     :title="'Switch 开关'"
-    :param="param"
-    @on-test="onTest">
+    :param="param">
     <div slot="tip">
       在两种状态间切换时用到的开关选择器
     </div>
@@ -11,13 +10,19 @@
       <dl class="group">
         <dt>当前值：</dt>
         <dd>
-          <kkk></kkk>
+          <kkk v-model="value1"></kkk>
         </dd>
       </dl>
       <dl class="group">
         <dt>禁用：</dt>
         <dd>
-          <kkk></kkk>
+          <kkk v-model="value2" :text="['ON', 'OFF']" :disabled="true"></kkk>
+        </dd>
+      </dl>
+      <dl class="group">
+        <dt>禁用：</dt>
+        <dd>
+          <kkk v-model="value3" :text="['ON', 'OFF']" :disabled="true"></kkk>
         </dd>
       </dl>
     </template>
@@ -36,10 +41,13 @@
     },
     data() {
       return {
+        value1: true,
+        value2: true,
+        value3: false,
         param: [
           {
-            name: 'value',
-            explain: '-',
+            name: 'v-model',
+            explain: 'switch按钮最终选择的值',
             type: 'Boolean',
             default: true,
             isMust: true
@@ -53,23 +61,20 @@
           },
           {
             name: 'text',
-            explain: 'switch按钮两侧的文字',
+            explain: 'switch按钮两侧的文字；数组长度为2，超出无效',
             type: 'Array',
             default: ['开', '关'],
             isMust: false
+          },
+          {
+            name: 'on-change',
+            explain: '在选项状态发生改变时触发，返回原生事件对象',
+            type: '-',
+            default: '-',
+            isMust: '-'
           }
         ]
       };
-    },
-    methods: {
-      onTest(button) {
-        switch(button.flag) {
-          case '':
-            break;
-          default:
-            break;
-        }
-      },
     }
   };
 </script>

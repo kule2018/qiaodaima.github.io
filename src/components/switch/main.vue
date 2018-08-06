@@ -1,11 +1,12 @@
 <template>
   <label class="switch-item">
     <input
+      v-model="checked"
       :disabled="disabled"
       @change="onChange"
-      type="checkbox"
-    >
-    <span class="inner-text">开</span>
+      type="checkbox">
+    <span v-if="this.value" class="inner-text">{{this.text[0]}}</span>
+    <span v-else class="inner-text">{{this.text[1]}}</span>
   </label>
 </template>
 
@@ -15,7 +16,7 @@
     props: {
       value: {
         type: Boolean,
-        default: true
+        required: true
       },
       disabled: {
         type: Boolean,
@@ -25,6 +26,16 @@
         type: Array,
         default: function () {
           return ['开', '关']
+        }
+      }
+    },
+    computed: {
+      checked: {
+        get() {
+          return this.value;
+        },
+        set(newValue) {
+          this.$emit('input', newValue);
         }
       }
     },
@@ -38,6 +49,9 @@
 
 <style lang="scss" scoped>
   .switch-item {
+    $height: 22px; // 小圆圈 的高度
+    $margin: 2px; // 小圆圈距离周边的距离
+
     position: relative;
     cursor: pointer;
 
@@ -48,43 +62,43 @@
       width: 100%; height: 100%;
       opacity: 0;
 
-      &:active {
-        .inner-text {
-          &:after {
-            width: 22px;
-          }
-        }
-      }
       &:checked {
         & ~ .inner-text {
+          padding-left: 8px;
+          padding-right: $height - $margin * 2 + 5px; // 一个小圆球的大小 再增加5px的距离
           text-align: left;
           background: #409eff;
 
+          // css 过渡的前提是 过渡前后属性必须是一致的 因此这边不能再用right
           &:after {
             left: calc(100% - 2px);
             transform: translate(-100%, 0);
           }
         }
       }
+      &:disabled {
+        & ~ .inner-text {
+          opacity: .5;;
+        }
+      }
     }
     .inner-text {
-      $height: 22px;
-
       position: relative;
-      padding: 0 10px;
-      width: 50px; height: $height;
+      padding-left: $height - $margin * 2 + 5px;
+      padding-right: 8px;
+      min-width: 45px; height: $height;
       line-height: $height;
       color: #fff;
       text-align: right;
       font-size: 12px;
       border-radius: $height;
-      background: #ccc;
+      background: #c0c4cc;
       transition: all .2s;
 
       &:after {
         position: absolute; content: "";
-        left: 2px; top: 2px; bottom: 2px; right: auto;
-        width: 18px;
+        left: $margin; top: $margin; bottom: $margin;
+        width: $height - $margin * 2; // 保证 宽度 和 高度 的值是一致的
         border-radius: 50%;
         background: #fff;
         transition: all .2s;
