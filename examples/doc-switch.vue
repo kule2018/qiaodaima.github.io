@@ -14,6 +14,12 @@
           <kkk></kkk>
         </dd>
       </dl>
+      <dl class="group">
+        <dt>禁用：</dt>
+        <dd>
+          <kkk></kkk>
+        </dd>
+      </dl>
     </template>
   </DocItem>
 </template>
@@ -32,10 +38,24 @@
       return {
         param: [
           {
-            name: '-',
+            name: 'value',
             explain: '-',
-            type: '-',
-            default: '-',
+            type: 'Boolean',
+            default: true,
+            isMust: true
+          },
+          {
+            name: 'disabled',
+            explain: '是否禁用switch按钮',
+            type: 'Boolean',
+            default: false,
+            isMust: false
+          },
+          {
+            name: 'text',
+            explain: 'switch按钮两侧的文字',
+            type: 'Array',
+            default: ['开', '关'],
             isMust: false
           }
         ]
@@ -68,7 +88,7 @@
       font-size: 12px;
     }
     & > dd {
-      // font-size: 0;
+      font-size: 0;
     }
   }
 </style>

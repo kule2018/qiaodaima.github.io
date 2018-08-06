@@ -1,6 +1,10 @@
 <template>
   <label class="switch-item">
-    <input type="checkbox">
+    <input
+      :disabled="disabled"
+      @change="onChange"
+      type="checkbox"
+    >
     <span class="inner-text">开</span>
   </label>
 </template>
@@ -18,8 +22,15 @@
         default: false
       },
       text: {
-        type: String,
-        default: '复选框文案'
+        type: Array,
+        default: function () {
+          return ['开', '关']
+        }
+      }
+    },
+    methods: {
+      onChange(event) {
+        this.$emit('on-change', event);
       }
     }
   }
@@ -57,14 +68,16 @@
       }
     }
     .inner-text {
+      $height: 22px;
+
       position: relative;
-      padding: 0 5px;
-      width: 44px; height: 22px;
-      line-height: 22px;
+      padding: 0 10px;
+      width: 50px; height: $height;
+      line-height: $height;
       color: #fff;
       text-align: right;
       font-size: 12px;
-      border-radius: 22px;
+      border-radius: $height;
       background: #ccc;
       transition: all .2s;
 
